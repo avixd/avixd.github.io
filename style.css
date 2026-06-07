@@ -541,6 +541,8 @@ footer {
   .hero-visual { width: 100%; max-width: 400px; margin: 0 auto; }
   .about-grid { grid-template-columns: 1fr; }
   .contact-grid { grid-template-columns: 1fr; }
+  .contact-form { order: -1; }
+  .contact-channels { order: 1; }
 }
 
 @media (max-width: 640px) {
