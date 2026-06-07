@@ -223,6 +223,10 @@ section:nth-child(even) { background: var(--bg2); }
 }
 .btn-ghost:hover { border-color: var(--accent); background: rgba(124,92,252,0.08); transform: translateY(-2px); }
 
+.hero-dev-label {
+  font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--accent); margin-top: 4px; margin-bottom: 2px;
+}
 .hero-certs { display: flex; flex-wrap: wrap; gap: 10px; }
 .cert-chip {
   font-size: .75rem; font-weight: 600; color: var(--muted);
@@ -323,14 +327,38 @@ section:nth-child(even) { background: var(--bg2); }
 }
 .skill-fill.animated { width: var(--w); }
 
+.exp-chips-label {
+  font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 10px; margin-top: 4px;
+}
 .experience-chips { display: flex; flex-direction: column; gap: 10px; }
 .exp-chip {
   background: rgba(255,255,255,0.03); border: 1px solid var(--border);
-  border-radius: 10px; padding: 12px 16px;
+  border-radius: 10px; padding: 12px 14px;
 }
-.exp-role { font-size: .875rem; font-weight: 700; }
-.exp-org { font-size: .8rem; color: var(--muted); }
-.exp-period { font-size: .75rem; color: var(--accent2); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+.exp-chip-top {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 8px; margin-bottom: 8px; flex-wrap: wrap;
+}
+.exp-role { font-size: .82rem; font-weight: 700; }
+.exp-org { font-size: .75rem; color: var(--muted); margin-top: 1px; }
+.exp-period {
+  font-size: .72rem; color: var(--accent2); white-space: nowrap;
+  font-family: 'JetBrains Mono', monospace; flex-shrink: 0; padding-top: 1px;
+}
+.exp-chip-list {
+  list-style: none; padding: 0; margin: 0;
+  display: flex; flex-direction: column; gap: 5px;
+}
+.exp-chip-list li {
+  font-size: .77rem; color: var(--muted); line-height: 1.5;
+  padding-left: 13px; position: relative;
+}
+.exp-chip-list li::before {
+  content: ''; position: absolute; left: 0; top: 7px;
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--accent);
+}
 
 /* ── Portfolio ── */
 #portfolio { background: var(--bg); }
@@ -450,56 +478,6 @@ section:nth-child(even) { background: var(--bg2); }
 .form-group textarea::placeholder { color: rgba(136,136,160,0.5); }
 
 .form-note { font-size: .82rem; color: var(--accent2); min-height: 1.2em; }
-
-/* ── Experience Section ── */
-.exp-summary {
-  color: var(--muted); font-size: .97rem; line-height: 1.7;
-  max-width: 780px; margin-bottom: 48px;
-}
-
-.exp-timeline {
-  display: flex; flex-direction: column; gap: 24px;
-}
-
-.exp-card {
-  background: var(--bg2); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 28px 32px;
-  position: relative; overflow: hidden;
-  transition: border-color .25s, transform .25s;
-}
-.exp-card::before {
-  content: ''; position: absolute; left: 0; top: 0; bottom: 0;
-  width: 3px; background: var(--grad);
-}
-.exp-card:hover { border-color: rgba(124,92,252,0.4); transform: translateX(4px); }
-
-.exp-card-header {
-  display: flex; justify-content: space-between; align-items: flex-start;
-  gap: 16px; margin-bottom: 16px; flex-wrap: wrap;
-}
-.exp-card-role {
-  font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 4px;
-}
-.exp-card-org { font-size: .88rem; color: var(--accent2); }
-.exp-card-period {
-  font-size: .82rem; color: var(--muted); white-space: nowrap;
-  background: var(--bg3); border: 1px solid var(--border);
-  border-radius: 20px; padding: 4px 12px; flex-shrink: 0;
-}
-
-.exp-bullets {
-  list-style: none; padding: 0; margin: 0;
-  display: flex; flex-direction: column; gap: 10px;
-}
-.exp-bullets li {
-  padding-left: 20px; position: relative;
-  font-size: .91rem; color: var(--muted); line-height: 1.65;
-}
-.exp-bullets li::before {
-  content: ''; position: absolute; left: 0; top: 9px;
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--grad);
-}
 
 /* ── Footer ── */
 footer {
