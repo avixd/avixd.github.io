@@ -92,9 +92,6 @@ form.addEventListener('submit', async (e) => {
   btn.textContent = 'Sending…';
   btn.disabled = true;
 
-  // Replace the action URL below with your Formspree endpoint, e.g.:
-  // https://formspree.io/f/YOUR_ID
-  // Until then we simulate a send.
   const FORMSPREE_URL = form.dataset.action || '';
 
   if (FORMSPREE_URL) {
@@ -120,7 +117,8 @@ form.addEventListener('submit', async (e) => {
     const email   = form.querySelector('[name=email]').value;
     const subject = form.querySelector('[name=subject]').value;
     const message = form.querySelector('[name=message]').value;
-    const mailto  = `mailto:?subject=${encodeURIComponent(subject || 'Portfolio enquiry')}&body=${encodeURIComponent(`Hi Avinash,\n\n${message}\n\n— ${name} (${email})`)}`;
+    const to      = form.dataset.email || 'dudaniavinash24@gmail.com';
+    const mailto  = `mailto:${to}?subject=${encodeURIComponent(subject || 'Portfolio enquiry')}&body=${encodeURIComponent(`Hi Avinash,\n\n${message}\n\n— ${name} (${email})`)}`;
     window.open(mailto);
     formNote.textContent = '✓ Opening your email client…';
     form.reset();
