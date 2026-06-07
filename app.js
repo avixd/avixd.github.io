@@ -20,12 +20,6 @@ document.querySelectorAll('.mobile-link').forEach(link => {
   });
 });
 
-/* ── Smooth scroll for nav-cta button ── */
-window.scrollTo = function(target) {
-  if (typeof target === 'string') {
-    document.querySelector(target)?.scrollIntoView({ behavior: 'smooth' });
-  }
-};
 
 /* ── Intersection Observer: fade-up + skill bars ── */
 const io = new IntersectionObserver((entries) => {
