@@ -1,3 +1,5 @@
+window.scrollTo(0, 0);
+
 /* ── Nav scroll effect ── */
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
