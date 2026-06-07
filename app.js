@@ -82,7 +82,7 @@ filterBtns.forEach(btn => {
   });
 });
 
-/* ── Contact form (Formspree-ready or mailto fallback) ── */
+/* ── Contact form — FormSubmit.co (delivers real email, no signup) ── */
 const form = document.getElementById('contactForm');
 const formNote = document.getElementById('formNote');
 
@@ -91,37 +91,32 @@ form.addEventListener('submit', async (e) => {
   const btn = form.querySelector('button[type="submit"]');
   btn.textContent = 'Sending…';
   btn.disabled = true;
+  formNote.textContent = '';
 
-  const FORMSPREE_URL = form.dataset.action || '';
+  try {
+    const data = new FormData(form);
+    // Tell FormSubmit to skip its own thank-you page redirect
+    data.append('_captcha', 'false');
+    data.append('_subject', data.get('subject') || 'New message from portfolio');
+    data.append('_template', 'table');
 
-  if (FORMSPREE_URL) {
-    try {
-      const data = Object.fromEntries(new FormData(form));
-      const res = await fetch(FORMSPREE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      if (res.ok) {
-        formNote.textContent = '✓ Message sent! I\'ll get back to you shortly.';
-        form.reset();
-      } else {
-        formNote.textContent = '✗ Something went wrong. Try reaching me on TopMate or Fiverr.';
-      }
-    } catch {
-      formNote.textContent = '✗ Network error. Please try again.';
+    const res = await fetch(form.action, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: data,
+    });
+
+    if (res.ok) {
+      formNote.textContent = '✓ Message sent! I\'ll get back to you shortly.';
+      formNote.style.color = 'var(--accent2)';
+      form.reset();
+    } else {
+      formNote.textContent = '✗ Something went wrong — please email me directly at dudaniavinash24@gmail.com';
+      formNote.style.color = '#f87171';
     }
-  } else {
-    // Fallback: open mailto
-    const name    = form.querySelector('[name=name]').value;
-    const email   = form.querySelector('[name=email]').value;
-    const subject = form.querySelector('[name=subject]').value;
-    const message = form.querySelector('[name=message]').value;
-    const to      = form.dataset.email || 'dudaniavinash24@gmail.com';
-    const mailto  = `mailto:${to}?subject=${encodeURIComponent(subject || 'Portfolio enquiry')}&body=${encodeURIComponent(`Hi Avinash,\n\n${message}\n\n— ${name} (${email})`)}`;
-    window.open(mailto);
-    formNote.textContent = '✓ Opening your email client…';
-    form.reset();
+  } catch {
+    formNote.textContent = '✗ Network error — please try again or email dudaniavinash24@gmail.com';
+    formNote.style.color = '#f87171';
   }
 
   btn.textContent = 'Send message';
