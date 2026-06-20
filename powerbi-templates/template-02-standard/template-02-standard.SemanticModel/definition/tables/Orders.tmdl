@@ -1,0 +1,160 @@
+table Orders
+	lineageTag: 769f276b-113c-4c0e-84e3-3e7d00d6c8a1
+
+	column OrderNumber
+		formatString: 0
+		lineageTag: 5c788def-ac0a-4f8c-9c94-64023e959448
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [OrderNumber]
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderLineNumber
+		formatString: 0
+		lineageTag: ac500748-7251-4e5b-9e78-3dc7763a927a
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [OrderLineNumber]
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerKey
+		formatString: 0
+		lineageTag: 97175928-aa9e-4a13-a52c-48fa5275c681
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [CustomerKey]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		formatString: 0
+		lineageTag: 078bb714-a1b3-4b3a-bb76-6afeb67766ab
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [ProductKey]
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreKey
+		formatString: 0
+		lineageTag: d0eb00ab-f3f2-4593-9fba-2f3562d274c8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [StoreKey]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		lineageTag: 58f2dfec-07de-413d-988c-9a1844b8cc13
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Currency]
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderDate
+		formatString: General Date
+		lineageTag: c0e4667b-6802-4da1-a4ea-19bc7cf87f8e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [OrderDate]
+
+		annotation SummarizationSetBy = Automatic
+
+	column RequestedDeliveryDate
+		formatString: General Date
+		lineageTag: 99f96d11-0104-4dba-968e-ca74dd92d092
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [RequestedDeliveryDate]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ApprovedDate
+		formatString: General Date
+		lineageTag: 45cccc80-e8cc-4387-99db-0657b6c36084
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [ApprovedDate]
+
+		annotation SummarizationSetBy = Automatic
+
+	column FulfilledDate
+		formatString: General Date
+		lineageTag: 52d1e94c-ee75-4d32-8d1c-757a26a214c2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [FulfilledDate]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ShippedDate
+		formatString: General Date
+		lineageTag: 6e8c06fc-4652-4785-9612-5e7022cab447
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [ShippedDate]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeliveredDate
+		formatString: General Date
+		lineageTag: 21158660-c060-45e9-a740-783b488172b4
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [DeliveredDate]
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderStatus
+		lineageTag: 0efb7409-38ba-4be4-af03-1f0f8b40ee14
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [OrderStatus]
+
+		annotation SummarizationSetBy = Automatic
+
+	column DeliverySpeed
+		formatString: 0
+		lineageTag: 47e74fdb-f465-4a3f-b7fc-f911099bc46c
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [DeliverySpeed]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quantity
+		formatString: 0
+		lineageTag: 718064ba-1862-4162-91e7-4ea0d91ab9c1
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Quantity]
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitPrice
+		lineageTag: 3c044c6d-2df9-4a9c-a989-c0dadd7b5773
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [UnitPrice]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition Orders = calculated
+		mode: import
+		source =
+				
+				DATAGOBLINS.SAMPLEDATA.ORDERS (
+				    100,
+				    DATE ( 2025, 09, 01 ),
+				    DATE ( 2025, 09, 18 ),
+				    100,
+				    250,
+				    5,
+				    1337
+				)
+

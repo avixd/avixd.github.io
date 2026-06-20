@@ -1,0 +1,124 @@
+table Customer
+	lineageTag: fd5c4b03-7df2-4b47-a5bc-008346b8e7a4
+
+	column CustomerKey
+		formatString: 0
+		lineageTag: 2bd5780f-c7eb-4e73-9b61-2c5eeedcb746
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [CustomerKey]
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerName
+		lineageTag: 92e681d4-d568-4471-99ba-2fa35ff008ef
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [CustomerName]
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerType
+		lineageTag: 14a1161c-410b-4d6d-9307-c16921d40c05
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [CustomerType]
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerSegment
+		lineageTag: bf9e5e13-04e5-4438-8bf0-f09d6f4b92de
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [CustomerSegment]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Industry
+		lineageTag: 77c8eeaa-2dd4-4afb-a31b-485b9c8cfea3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Industry]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		lineageTag: 6d141db8-292a-4a0b-b301-7bee31e7bcf8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Country]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region
+		lineageTag: 280d29dd-460a-47ca-839e-a8202c8f5ccc
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Region]
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		lineageTag: 0483d9fd-9fea-4a03-83b6-e3fbc0486f14
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [City]
+
+		annotation SummarizationSetBy = Automatic
+
+	column LifetimeValue
+		lineageTag: ab9b5f50-66ee-4651-8a72-29a42c90d2ba
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [LifetimeValue]
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CreditLimit
+		formatString: 0
+		lineageTag: d03dae3f-9cae-4673-8bca-8df0c90f1ed2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [CreditLimit]
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountOpenDate
+		formatString: General Date
+		lineageTag: f45f15f3-afa0-4aa4-a2ac-8bc35ad88cf5
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [AccountOpenDate]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		lineageTag: 6adfc76c-ed4c-4f1c-8052-3e901f194613
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Status]
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustKey
+		formatString: 0
+		lineageTag: 28dced85-c474-4179-92dd-d057cc9c1d33
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [CustKey]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Customer = calculated
+		mode: import
+		source =
+				
+				DATAGOBLINS.SAMPLEDATA.CUSTOMER(
+				    'Orders'[CustomerKey],
+				    0,
+				    FALSE,
+				    1337
+				)
+

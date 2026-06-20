@@ -1,0 +1,173 @@
+table Store
+	lineageTag: 0286164e-b7cd-410a-aaec-ccf4969bb6b2
+
+	column StrKey
+		formatString: 0
+		lineageTag: 116f82ce-0c37-4c1d-9826-b536b6668aea
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [StrKey]
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreKey
+		formatString: 0
+		lineageTag: 6ac9949f-a006-43c1-a002-9538ee0fa807
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [StoreKey]
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreCode
+		lineageTag: 7fd3abec-f1d4-47cc-b6f0-bb2e6abeabc8
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [StoreCode]
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreName
+		lineageTag: f2ffd61d-7db9-4d86-b6a7-64452864dc6b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [StoreName]
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreRegion
+		lineageTag: fc0d5e8e-f420-499a-a1f7-7b61e67dc05b
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [StoreRegion]
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreDistrict
+		lineageTag: b2e51431-7d3a-408e-8c19-eff15aa52d16
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [StoreDistrict]
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreType
+		lineageTag: 969e2dc6-5f50-44a1-9ed9-98f220c93621
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [StoreType]
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreFormat
+		lineageTag: 2aeb7bf3-4402-4e09-8560-d2d5622e052c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [StoreFormat]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		lineageTag: 497694ee-5220-4cbe-a982-7fb55c98812e
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Country]
+
+		annotation SummarizationSetBy = Automatic
+
+	column State
+		lineageTag: 0867cbc5-1afb-419a-af9a-00cb24a0dcf2
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [State]
+
+		annotation SummarizationSetBy = Automatic
+
+	column City
+		lineageTag: 60cfc831-e1c4-4b8a-a46f-1260f4619a2c
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [City]
+
+		annotation SummarizationSetBy = Automatic
+
+	column PostalCode
+		lineageTag: 4800ea51-bfc7-4f07-91cd-753f81d3a2e1
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [PostalCode]
+
+		annotation SummarizationSetBy = Automatic
+
+	column SquareFootage
+		formatString: 0
+		lineageTag: 23c577bf-1d71-4896-a750-00e4adf2ee9a
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [SquareFootage]
+
+		annotation SummarizationSetBy = Automatic
+
+	column EmployeeCount
+		formatString: 0
+		lineageTag: 6ecd0019-108b-4c83-bc3a-134e00781dbf
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [EmployeeCount]
+
+		annotation SummarizationSetBy = Automatic
+
+	column ParkingSpaces
+		formatString: 0
+		lineageTag: 9fa94264-46b4-4d00-a3ef-80af025da272
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [ParkingSpaces]
+
+		annotation SummarizationSetBy = Automatic
+
+	column StoreManager
+		lineageTag: 9ed9bdc2-cc23-4645-83d3-2a2e825be276
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [StoreManager]
+
+		annotation SummarizationSetBy = Automatic
+
+	column OpenDate
+		formatString: General Date
+		lineageTag: fff2d839-48a3-4daa-9a3d-22d02386e1bb
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [OpenDate]
+
+		annotation SummarizationSetBy = Automatic
+
+	column LastRenovationDate
+		formatString: General Date
+		lineageTag: a6c61455-ce6e-4996-9375-77f33a659471
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [LastRenovationDate]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		lineageTag: 73aafd58-031d-41dd-a99e-3c743cdb40fb
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Status]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Store = calculated
+		mode: import
+		source =
+				
+				DATAGOBLINS.SAMPLEDATA.STORE (
+				    'Orders'[StoreKey],
+				    0,
+				    FALSE,
+				    1337
+				)
+

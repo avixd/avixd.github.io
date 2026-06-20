@@ -1,0 +1,15 @@
+relationship 6fde6ff9-84bb-dcec-81ea-97ddd454be62
+	fromColumn: Orders.ProductKey
+	toColumn: Product.ProductKey
+
+relationship 77948d8c-befe-e144-12ff-ff421dfa2ab5
+	fromColumn: Orders.StoreKey
+	toColumn: Store.StoreKey
+
+relationship 2fb94759-8cff-05ea-ed83-3c45c49286e5
+	fromColumn: Orders.OrderDate
+	toColumn: Date.Date
+
+relationship 1c315ec4-12e4-ca48-b728-fdef03f6a0b8
+	fromColumn: Orders.CustomerKey
+	toColumn: Customer.CustomerKey

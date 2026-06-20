@@ -1,0 +1,92 @@
+table Inventory
+	lineageTag: 97e32f4c-8a1b-49c2-93d1-7c337543f9d7
+
+	column SnapshotDateKey
+		lineageTag: 5b08580d-2c30-4603-baf0-69ac3075e6fd
+		isNameInferred
+		sourceColumn: [SnapshotDateKey]
+
+	column ProductKey
+		lineageTag: eb3dcdcb-5684-4c41-91be-a0518f1c656b
+		isNameInferred
+		sourceColumn: [ProductKey]
+
+	column WarehouseKey
+		lineageTag: 1e0984d2-9009-4227-9ec0-73d175129c8b
+		isNameInferred
+		sourceColumn: [WarehouseKey]
+
+	column OnHandQuantity
+		lineageTag: c1261890-285c-4b02-be5f-3b2341f413ef
+		isNameInferred
+		sourceColumn: [OnHandQuantity]
+
+	column ReservedQuantity
+		lineageTag: e6df7827-af86-4092-ac04-f8e086c508a5
+		isNameInferred
+		sourceColumn: [ReservedQuantity]
+
+	column AvailableQuantity
+		lineageTag: a1f91c9c-23b5-4b9a-8412-9051ef00ce9b
+		isNameInferred
+		sourceColumn: [AvailableQuantity]
+
+	column InTransitQuantity
+		lineageTag: 2aee2a90-3d0f-487a-91e3-7663b05eead6
+		isNameInferred
+		sourceColumn: [InTransitQuantity]
+
+	column ProjectedQuantity
+		lineageTag: d2fff102-d0cb-4f35-abed-a81ca0a62dd5
+		isNameInferred
+		sourceColumn: [ProjectedQuantity]
+
+	column ReorderPoint
+		lineageTag: c568fc37-de66-4daf-b57a-0ceb9a38cbc2
+		isNameInferred
+		sourceColumn: [ReorderPoint]
+
+	column SafetyStockLevel
+		lineageTag: 7d1928c6-bf7a-4089-8f73-8782f9594369
+		isNameInferred
+		sourceColumn: [SafetyStockLevel]
+
+	column BelowReorderPoint
+		lineageTag: 04f753f8-5533-4207-b5d7-2f9d11e5c93c
+		isNameInferred
+		sourceColumn: [BelowReorderPoint]
+
+	column BelowSafetyStock
+		lineageTag: a47beac0-66b1-4077-8e31-c651dd121db6
+		isNameInferred
+		sourceColumn: [BelowSafetyStock]
+
+	column OutOfStock
+		lineageTag: ae2b6c6a-f197-475f-8ac8-3f292c0e0db1
+		isNameInferred
+		sourceColumn: [OutOfStock]
+
+	column UnitCost
+		lineageTag: ac5ff341-b4eb-46e4-adae-fcb372605e51
+		isNameInferred
+		sourceColumn: [UnitCost]
+
+	column InventoryValue
+		lineageTag: dfbfdf4b-58da-4092-b6a3-6f3b8bd79a50
+		isNameInferred
+		sourceColumn: [InventoryValue]
+
+	partition Inventory = calculated
+		mode: import
+		source =
+				
+				DATAGOBLINS.SAMPLEDATA.INVENTORY(
+				    18,
+				    DATE ( 2025, 09, 01 ),
+				    250,
+				    3,
+				    1337
+				)
+
+	annotation PBI_Id = 85a3dfdc57ee47f981ebc9b09ee94195
+

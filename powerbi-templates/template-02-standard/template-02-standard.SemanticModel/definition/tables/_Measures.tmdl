@@ -1,0 +1,48 @@
+table _Measures
+	lineageTag: c3d4e5f6-a7b8-9012-cdef-123456789012
+
+	measure 'Total Revenue' =
+			SUMX ( 'Orders', 'Orders'[Quantity] * 'Orders'[UnitPrice] )
+		lineageTag: d4e5f6a7-b8c9-0123-defa-234567890123
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Orders' =
+			DISTINCTCOUNT ( 'Orders'[OrderNumber] )
+		lineageTag: e5f6a7b8-c9d0-1234-efab-345678901234
+		formatString: #,0
+
+	measure 'Total Customers' =
+			DISTINCTCOUNT ( 'Orders'[CustomerKey] )
+		lineageTag: f6a7b8c9-d0e1-2345-fabc-456789012345
+		formatString: #,0
+
+	measure 'Avg Order Value' =
+			DIVIDE ( [Total Revenue], [Total Orders] )
+		lineageTag: a7b8c9d0-e1f2-3456-abcd-567890123456
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Quantity' =
+			SUM ( 'Orders'[Quantity] )
+		lineageTag: b8c9d0e1-f2a3-4567-bcde-678901234567
+		formatString: #,0
+
+	measure 'Revenue by Category' =
+			CALCULATE (
+			    [Total Revenue],
+			    ALLEXCEPT ( 'Product', 'Product'[ProductCategory] )
+			)
+		lineageTag: c9d0e1f2-a3b4-5678-cdef-789012345678
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	partition _Measures = calculated
+		mode: import
+		source =
+				ROW ( "Placeholder", BLANK() )
+
+	annotation PBI_Id = c3d4e5f6a7b89012cdef1234
