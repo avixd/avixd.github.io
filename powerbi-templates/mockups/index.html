@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Power BI Template Gallery</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+  body { background: #0d1117; min-height: 100vh; padding: 40px 32px; }
+
+  h1 { color: #e6edf3; font-size: 28px; font-weight: 800; }
+  .subtitle { color: #8b949e; font-size: 14px; margin-top: 6px; margin-bottom: 40px; }
+
+  .grid { display: flex; flex-direction: column; gap: 48px; }
+
+  .template-row { background: #161b22; border: 1px solid #21262d; border-radius: 14px; overflow: hidden; }
+  .template-meta { padding: 20px 24px; border-bottom: 1px solid #21262d; display: flex; justify-content: space-between; align-items: center; }
+  .meta-left { }
+  .t-number { font-size: 11px; color: #6e7681; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+  .t-name { font-size: 18px; font-weight: 700; color: #e6edf3; margin-top: 2px; }
+  .t-desc { font-size: 13px; color: #8b949e; margin-top: 4px; }
+  .meta-right { display: flex; gap: 8px; align-items: center; }
+  .tag { padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+  .tag-size { background: rgba(88,166,255,0.15); color: #58a6ff; }
+  .tag-theme { background: rgba(139,148,158,0.15); color: #8b949e; }
+
+  .preview-frame { width: 100%; background: #000; display: flex; align-items: center; justify-content: center; padding: 20px; }
+  iframe { border: none; display: block; box-shadow: 0 8px 40px rgba(0,0,0,0.6); }
+
+  .design-tokens { padding: 16px 24px; display: flex; gap: 24px; border-top: 1px solid #21262d; flex-wrap: wrap; }
+  .token { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #8b949e; }
+  .color-swatch { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
+  .token-label { color: #6e7681; }
+  .token-value { color: #c9d1d9; font-family: monospace; }
+
+  .open-btn { margin: 0 24px 20px; display: inline-block; padding: 8px 18px;
+    background: rgba(88,166,255,0.1); color: #58a6ff; border: 1px solid rgba(88,166,255,0.3);
+    border-radius: 8px; font-size: 12px; text-decoration: none; }
+  .open-btn:hover { background: rgba(88,166,255,0.2); }
+</style>
+</head>
+<body>
+<h1>Power BI Report Templates</h1>
+<div class="subtitle">5 canvas sizes · Mock-up gallery · Click "Open Full Size" to preview each template</div>
+
+<div class="grid">
+
+  <!-- T01 -->
+  <div class="template-row">
+    <div class="template-meta">
+      <div class="meta-left">
+        <div class="t-number">Template 01</div>
+        <div class="t-name">Compact Dashboard</div>
+        <div class="t-desc">KPI-first layout for embedded reports, small screens, and widget dashboards</div>
+      </div>
+      <div class="meta-right">
+        <span class="tag tag-size">800 × 600 px</span>
+        <span class="tag tag-theme">Dark Navy</span>
+      </div>
+    </div>
+    <div class="preview-frame">
+      <iframe src="template-01-compact.html" width="800" height="600" scrolling="no"></iframe>
+    </div>
+    <div class="design-tokens">
+      <div class="token"><div class="color-swatch" style="background:#0f0f1a"></div><span class="token-label">Canvas:</span><span class="token-value">#0f0f1a</span></div>
+      <div class="token"><div class="color-swatch" style="background:#e94560"></div><span class="token-label">Accent:</span><span class="token-value">#e94560</span></div>
+      <div class="token"><div class="color-swatch" style="background:#4f8ef7"></div><span class="token-label">Primary:</span><span class="token-value">#4f8ef7</span></div>
+      <div class="token"><div class="color-swatch" style="background:#00d4aa"></div><span class="token-label">Positive:</span><span class="token-value">#00d4aa</span></div>
+      <div class="token"><span class="token-label">Font:</span><span class="token-value">Segoe UI · 10/11/16/22px</span></div>
+      <div class="token"><span class="token-label">Style:</span><span class="token-value">Dark, compact, accent border</span></div>
+    </div>
+    <a href="template-01-compact.html" target="_blank" class="open-btn">Open Full Size ↗</a>
+  </div>
+
+  <!-- T02 -->
+  <div class="template-row">
+    <div class="template-meta">
+      <div class="meta-left">
+        <div class="t-number">Template 02</div>
+        <div class="t-name">Standard Dashboard</div>
+        <div class="t-desc">Sidebar filters + tabbed navigation; ideal for analyst self-serve portals</div>
+      </div>
+      <div class="meta-right">
+        <span class="tag tag-size">1280 × 720 px</span>
+        <span class="tag tag-theme">Light Clean</span>
+      </div>
+    </div>
+    <div class="preview-frame">
+      <iframe src="template-02-standard.html" width="1280" height="720" scrolling="no" style="transform:scale(0.75);transform-origin:top left;margin-bottom:-180px"></iframe>
+    </div>
+    <div class="design-tokens">
+      <div class="token"><div class="color-swatch" style="background:#f7f8fa"></div><span class="token-label">Canvas:</span><span class="token-value">#f7f8fa</span></div>
+      <div class="token"><div class="color-swatch" style="background:#6366f1"></div><span class="token-label">Accent:</span><span class="token-value">#6366f1</span></div>
+      <div class="token"><div class="color-swatch" style="background:#e0e7ff"></div><span class="token-label">Muted:</span><span class="token-value">#e0e7ff</span></div>
+      <div class="token"><div class="color-swatch" style="background:#16a34a"></div><span class="token-label">Positive:</span><span class="token-value">#16a34a</span></div>
+      <div class="token"><span class="token-label">Font:</span><span class="token-value">Segoe UI · 10/11/13/26px</span></div>
+      <div class="token"><span class="token-label">Style:</span><span class="token-value">Light, card-based, sidebar nav</span></div>
+    </div>
+    <a href="template-02-standard.html" target="_blank" class="open-btn">Open Full Size ↗</a>
+  </div>
+
+  <!-- T03 -->
+  <div class="template-row">
+    <div class="template-meta">
+      <div class="meta-left">
+        <div class="t-number">Template 03</div>
+        <div class="t-name">Widescreen Operations</div>
+        <div class="t-desc">3-column operations center with live feed, geo map, and OEE gauge</div>
+      </div>
+      <div class="meta-right">
+        <span class="tag tag-size">1600 × 900 px</span>
+        <span class="tag tag-theme">Dark GitHub</span>
+      </div>
+    </div>
+    <div class="preview-frame">
+      <iframe src="template-03-widescreen.html" width="1600" height="900" scrolling="no" style="transform:scale(0.65);transform-origin:top left;margin-bottom:-315px"></iframe>
+    </div>
+    <div class="design-tokens">
+      <div class="token"><div class="color-swatch" style="background:#0d1117"></div><span class="token-label">Canvas:</span><span class="token-value">#0d1117</span></div>
+      <div class="token"><div class="color-swatch" style="background:#f97316"></div><span class="token-label">Accent:</span><span class="token-value">#f97316</span></div>
+      <div class="token"><div class="color-swatch" style="background:#3fb950"></div><span class="token-label">Positive:</span><span class="token-value">#3fb950</span></div>
+      <div class="token"><div class="color-swatch" style="background:#f85149"></div><span class="token-label">Critical:</span><span class="token-value">#f85149</span></div>
+      <div class="token"><span class="token-label">Font:</span><span class="token-value">Segoe UI · 9/10/12/13px</span></div>
+      <div class="token"><span class="token-label">Style:</span><span class="token-value">Dark, 3-col, status indicators</span></div>
+    </div>
+    <a href="template-03-widescreen.html" target="_blank" class="open-btn">Open Full Size ↗</a>
+  </div>
+
+  <!-- T04 -->
+  <div class="template-row">
+    <div class="template-meta">
+      <div class="meta-left">
+        <div class="t-number">Template 04</div>
+        <div class="t-name">Ultra-Wide Executive</div>
+        <div class="t-desc">Board-level command center with waterfall, cohort analysis, heat map, and alert feed</div>
+      </div>
+      <div class="meta-right">
+        <span class="tag tag-size">1920 × 1080 px</span>
+        <span class="tag tag-theme">Executive Dark Blue</span>
+      </div>
+    </div>
+    <div class="preview-frame">
+      <iframe src="template-04-ultrawide.html" width="1920" height="1080" scrolling="no" style="transform:scale(0.55);transform-origin:top left;margin-bottom:-486px"></iframe>
+    </div>
+    <div class="design-tokens">
+      <div class="token"><div class="color-swatch" style="background:#080c14"></div><span class="token-label">Canvas:</span><span class="token-value">#080c14</span></div>
+      <div class="token"><div class="color-swatch" style="background:#00c4ff"></div><span class="token-label">Accent:</span><span class="token-value">#00c4ff</span></div>
+      <div class="token"><div class="color-swatch" style="background:#22c55e"></div><span class="token-label">Positive:</span><span class="token-value">#22c55e</span></div>
+      <div class="token"><div class="color-swatch" style="background:#ef4444"></div><span class="token-label">Critical:</span><span class="token-value">#ef4444</span></div>
+      <div class="token"><span class="token-label">Font:</span><span class="token-value">Segoe UI · 9/10/12/24px</span></div>
+      <div class="token"><span class="token-label">Style:</span><span class="token-value">Deep blue, 4-col, board-grade</span></div>
+    </div>
+    <a href="template-04-ultrawide.html" target="_blank" class="open-btn">Open Full Size ↗</a>
+  </div>
+
+  <!-- T05 -->
+  <div class="template-row">
+    <div class="template-meta">
+      <div class="meta-left">
+        <div class="t-number">Template 05</div>
+        <div class="t-name">Portrait / Tablet Report</div>
+        <div class="t-desc">Vertical scroll layout for printable monthly reviews and tablet consumption</div>
+      </div>
+      <div class="meta-right">
+        <span class="tag tag-size">768 × 1024 px</span>
+        <span class="tag tag-theme">Warm Coral</span>
+      </div>
+    </div>
+    <div class="preview-frame">
+      <iframe src="template-05-portrait.html" width="768" height="1024" scrolling="no" style="transform:scale(0.75);transform-origin:top left;margin-bottom:-256px"></iframe>
+    </div>
+    <div class="design-tokens">
+      <div class="token"><div class="color-swatch" style="background:#ffffff"></div><span class="token-label">Canvas:</span><span class="token-value">#ffffff</span></div>
+      <div class="token"><div class="color-swatch" style="background:#ff6b6b"></div><span class="token-label">Accent:</span><span class="token-value">#ff6b6b</span></div>
+      <div class="token"><div class="color-swatch" style="background:#ee5a24"></div><span class="token-label">Secondary:</span><span class="token-value">#ee5a24</span></div>
+      <div class="token"><div class="color-swatch" style="background:#059669"></div><span class="token-label">Positive:</span><span class="token-value">#059669</span></div>
+      <div class="token"><span class="token-label">Font:</span><span class="token-value">Segoe UI · 10/11/13/32px</span></div>
+      <div class="token"><span class="token-label">Style:</span><span class="token-value">Light, portrait, hero header</span></div>
+    </div>
+    <a href="template-05-portrait.html" target="_blank" class="open-btn">Open Full Size ↗</a>
+  </div>
+
+</div>
+</body>
+</html>

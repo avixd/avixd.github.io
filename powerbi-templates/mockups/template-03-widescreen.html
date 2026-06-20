@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Template 03 – Widescreen (1600×900)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+  body { background: #0d1117; display: flex; flex-direction: column; align-items: center; padding: 32px; gap: 24px; }
+  .label { color: #8b949e; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+
+  .canvas {
+    width: 1600px; height: 900px; background: #0d1117;
+    border: 1px solid #30363d; border-radius: 12px; overflow: hidden;
+    display: grid; grid-template-rows: 60px 1fr 36px;
+  }
+
+  /* Header */
+  .header {
+    grid-column: 1/-1; background: #161b22;
+    border-bottom: 1px solid #21262d;
+    display: flex; align-items: center; justify-content: space-between; padding: 0 24px;
+  }
+  .header-left { display: flex; align-items: center; gap: 20px; }
+  .logo-mark { width: 32px; height: 32px; background: linear-gradient(135deg, #f97316, #ef4444);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 900; color: #fff; font-size: 15px; }
+  .report-title { font-size: 17px; font-weight: 700; color: #e6edf3; }
+  .report-desc { font-size: 11px; color: #8b949e; margin-top: 1px; }
+  .divider { width: 1px; height: 28px; background: #30363d; }
+  .nav-tabs { display: flex; gap: 2px; }
+  .nav-tab { padding: 6px 14px; color: #8b949e; font-size: 12px; border-radius: 6px; cursor: pointer; }
+  .nav-tab.active { background: rgba(249,115,22,0.15); color: #f97316; }
+  .header-right { display: flex; align-items: center; gap: 12px; }
+  .hdr-chip { background: #21262d; color: #8b949e; border: 1px solid #30363d;
+    border-radius: 6px; padding: 5px 12px; font-size: 11px; cursor: pointer; }
+  .hdr-chip.accent { background: rgba(249,115,22,0.1); color: #f97316; border-color: rgba(249,115,22,0.3); }
+
+  /* 3-column layout */
+  .layout { display: grid; grid-template-columns: 260px 1fr 300px; overflow: hidden; }
+
+  /* Left panel */
+  .left-panel { background: #161b22; border-right: 1px solid #21262d; padding: 16px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
+  .panel-section-title { font-size: 10px; color: #8b949e; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; }
+  .metric-stack { display: flex; flex-direction: column; gap: 8px; }
+  .metric-item { background: #0d1117; border: 1px solid #21262d; border-radius: 8px; padding: 12px; }
+  .metric-item .m-label { font-size: 10px; color: #8b949e; margin-bottom: 4px; }
+  .metric-item .m-value { font-size: 20px; font-weight: 700; color: #e6edf3; }
+  .metric-item .m-bar-wrap { height: 4px; background: #21262d; border-radius: 2px; margin-top: 8px; }
+  .metric-item .m-bar { height: 100%; border-radius: 2px; }
+  .metric-item .m-foot { display: flex; justify-content: space-between; margin-top: 4px; }
+  .metric-item .m-foot span { font-size: 10px; color: #8b949e; }
+  .metric-item .m-foot .up { color: #3fb950; }
+  .metric-item .m-foot .down { color: #f85149; }
+
+  /* Center panel */
+  .center-panel { padding: 16px; display: flex; flex-direction: column; gap: 12px; overflow: hidden; }
+
+  /* Map-like area (geo mockup) */
+  .geo-card { background: #161b22; border: 1px solid #21262d; border-radius: 10px; flex: 1; position: relative; overflow: hidden; }
+  .geo-header { padding: 14px 16px; border-bottom: 1px solid #21262d; display: flex; justify-content: space-between; align-items: center; }
+  .geo-title { font-size: 13px; font-weight: 700; color: #e6edf3; }
+  .geo-legend { display: flex; gap: 12px; }
+  .geo-leg-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: #8b949e; }
+  .geo-leg-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .map-area { position: relative; height: calc(100% - 50px); background: #0d1117;
+    display: flex; align-items: center; justify-content: center; }
+  .map-svg { opacity: 0.6; }
+  /* Bubble overlays */
+  .bubble { position: absolute; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 10px; font-weight: 700; border: 2px solid rgba(255,255,255,0.2); }
+
+  /* Line chart */
+  .line-card { background: #161b22; border: 1px solid #21262d; border-radius: 10px; padding: 14px; height: 220px; }
+  .lc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .lc-title { font-size: 13px; font-weight: 700; color: #e6edf3; }
+  .lc-toggles { display: flex; gap: 6px; }
+  .lc-toggle { font-size: 10px; color: #8b949e; padding: 3px 8px; border: 1px solid #21262d; border-radius: 4px; cursor: pointer; }
+  .lc-toggle.active { color: #f97316; border-color: #f97316; }
+
+  /* Right panel */
+  .right-panel { background: #161b22; border-left: 1px solid #21262d; padding: 16px; display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
+
+  /* Activity feed */
+  .activity-list { display: flex; flex-direction: column; gap: 0; }
+  .activity-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid #21262d; }
+  .activity-item:last-child { border-bottom: none; }
+  .activity-icon { width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 13px; }
+  .ai-green { background: rgba(63,185,80,0.15); }
+  .ai-orange { background: rgba(249,115,22,0.15); }
+  .ai-red { background: rgba(248,81,73,0.15); }
+  .ai-blue { background: rgba(88,166,255,0.15); }
+  .activity-body { flex: 1; }
+  .activity-title { font-size: 12px; color: #e6edf3; font-weight: 500; }
+  .activity-sub { font-size: 11px; color: #8b949e; margin-top: 2px; }
+  .activity-time { font-size: 10px; color: #6e7681; margin-top: 3px; }
+
+  /* Gauge */
+  .gauge-section { background: #0d1117; border: 1px solid #21262d; border-radius: 8px; padding: 14px; text-align: center; }
+  .gauge-title { font-size: 10px; color: #8b949e; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
+
+  /* Leaderboard */
+  .leaderboard { display: flex; flex-direction: column; gap: 8px; }
+  .lb-item { display: flex; align-items: center; gap: 8px; }
+  .lb-rank { width: 18px; font-size: 11px; color: #6e7681; font-weight: 700; text-align: center; }
+  .lb-avatar { width: 24px; height: 24px; border-radius: 50%; font-size: 10px; font-weight: 700; color: #fff;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .lb-name { flex: 1; font-size: 12px; color: #c9d1d9; }
+  .lb-bar-wrap { width: 80px; height: 6px; background: #21262d; border-radius: 3px; }
+  .lb-bar { height: 100%; border-radius: 3px; background: linear-gradient(90deg, #f97316, #ef4444); }
+  .lb-val { font-size: 11px; color: #8b949e; width: 40px; text-align: right; }
+
+  /* Footer */
+  .footer { grid-column: 1/-1; background: #161b22; border-top: 1px solid #21262d;
+    display: flex; align-items: center; justify-content: space-between; padding: 0 20px; }
+  .footer span { font-size: 10px; color: #6e7681; }
+  .status-pills { display: flex; gap: 8px; }
+  .status-pill { display: flex; align-items: center; gap: 4px; font-size: 10px; color: #8b949e; }
+  .status-led { width: 6px; height: 6px; border-radius: 50%; }
+  .led-green { background: #3fb950; box-shadow: 0 0 4px #3fb950; }
+  .led-yellow { background: #d29922; }
+</style>
+</head>
+<body>
+<div class="label">Template 03 — Widescreen Dashboard · 1600 × 900px · Dark GitHub</div>
+<div class="canvas">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-left">
+      <div class="logo-mark">⚡</div>
+      <div>
+        <div class="report-title">Nexus Intelligence Platform</div>
+        <div class="report-desc">Global Operations Command Center</div>
+      </div>
+      <div class="divider"></div>
+      <div class="nav-tabs">
+        <div class="nav-tab active">Operations</div>
+        <div class="nav-tab">Finance</div>
+        <div class="nav-tab">Supply Chain</div>
+        <div class="nav-tab">HR</div>
+        <div class="nav-tab">Customer</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="hdr-chip accent">🟢 Live · 09:42 AM</div>
+      <div class="hdr-chip">🌍 All Sites ▾</div>
+      <div class="hdr-chip">📅 Q2 2024 ▾</div>
+      <div class="hdr-chip">⬇ Export</div>
+    </div>
+  </div>
+
+  <!-- 3-col layout -->
+  <div class="layout">
+
+    <!-- Left -->
+    <div class="left-panel">
+      <div class="panel-section-title">Key Metrics</div>
+      <div class="metric-stack">
+
+        <div class="metric-item">
+          <div class="m-label">Units Produced</div>
+          <div class="m-value">142,840</div>
+          <div class="m-bar-wrap"><div class="m-bar" style="width:78%;background:linear-gradient(90deg,#f97316,#ef4444)"></div></div>
+          <div class="m-foot"><span>78% of target</span><span class="up">▲ 6.2%</span></div>
+        </div>
+
+        <div class="metric-item">
+          <div class="m-label">On-Time Delivery</div>
+          <div class="m-value">93.4%</div>
+          <div class="m-bar-wrap"><div class="m-bar" style="width:93%;background:#3fb950"></div></div>
+          <div class="m-foot"><span>Target: 95%</span><span class="down">▼ 1.6 pts</span></div>
+        </div>
+
+        <div class="metric-item">
+          <div class="m-label">Defect Rate</div>
+          <div class="m-value">1.8%</div>
+          <div class="m-bar-wrap"><div class="m-bar" style="width:18%;background:#f85149"></div></div>
+          <div class="m-foot"><span>Target: &lt;2%</span><span class="up">✓ In range</span></div>
+        </div>
+
+        <div class="metric-item">
+          <div class="m-label">Capacity Utilization</div>
+          <div class="m-value">87.2%</div>
+          <div class="m-bar-wrap"><div class="m-bar" style="width:87%;background:#58a6ff"></div></div>
+          <div class="m-foot"><span>Optimal: 85-90%</span><span class="up">✓ Optimal</span></div>
+        </div>
+
+        <div class="metric-item">
+          <div class="m-label">Operating Cost/Unit</div>
+          <div class="m-value">$14.82</div>
+          <div class="m-bar-wrap"><div class="m-bar" style="width:62%;background:#d2a679"></div></div>
+          <div class="m-foot"><span>Budget: $15.50</span><span class="up">▲ $0.68 saved</span></div>
+        </div>
+
+      </div>
+
+      <div class="panel-section-title" style="margin-top:4px">Leaderboard — Sites</div>
+      <div class="leaderboard">
+        <div class="lb-item">
+          <div class="lb-rank">1</div>
+          <div class="lb-avatar" style="background:#f97316">TX</div>
+          <div class="lb-name">Texas Plant</div>
+          <div class="lb-bar-wrap"><div class="lb-bar" style="width:100%"></div></div>
+          <div class="lb-val">98.2%</div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank">2</div>
+          <div class="lb-avatar" style="background:#ef4444">OH</div>
+          <div class="lb-name">Ohio Plant</div>
+          <div class="lb-bar-wrap"><div class="lb-bar" style="width:88%"></div></div>
+          <div class="lb-val">91.4%</div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank">3</div>
+          <div class="lb-avatar" style="background:#8b949e">DE</div>
+          <div class="lb-name">Delaware DC</div>
+          <div class="lb-bar-wrap"><div class="lb-bar" style="width:76%"></div></div>
+          <div class="lb-val">84.7%</div>
+        </div>
+        <div class="lb-item">
+          <div class="lb-rank">4</div>
+          <div class="lb-avatar" style="background:#6e7681">CA</div>
+          <div class="lb-name">California</div>
+          <div class="lb-bar-wrap"><div class="lb-bar" style="width:61%"></div></div>
+          <div class="lb-val">72.3%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center -->
+    <div class="center-panel">
+
+      <!-- Line chart -->
+      <div class="line-card">
+        <div class="lc-header">
+          <span class="lc-title">Production Output — 12 Months</span>
+          <div class="lc-toggles">
+            <span class="lc-toggle active">Units</span>
+            <span class="lc-toggle">Revenue</span>
+            <span class="lc-toggle">Efficiency</span>
+          </div>
+        </div>
+        <svg width="100%" height="160" viewBox="0 0 900 160" preserveAspectRatio="none">
+          <!-- Grid lines -->
+          <line x1="0" y1="40" x2="900" y2="40" stroke="#21262d" stroke-width="1"/>
+          <line x1="0" y1="80" x2="900" y2="80" stroke="#21262d" stroke-width="1"/>
+          <line x1="0" y1="120" x2="900" y2="120" stroke="#21262d" stroke-width="1"/>
+          <!-- Area fill -->
+          <path d="M0,120 L75,100 L150,90 L225,95 L300,70 L375,60 L450,55 L525,65 L600,50 L675,40 L750,45 L825,35 L900,30 L900,160 L0,160 Z"
+            fill="url(#areaGrad)" opacity="0.3"/>
+          <!-- Line -->
+          <path d="M0,120 L75,100 L150,90 L225,95 L300,70 L375,60 L450,55 L525,65 L600,50 L675,40 L750,45 L825,35 L900,30"
+            fill="none" stroke="#f97316" stroke-width="2.5" stroke-linejoin="round"/>
+          <!-- Target line -->
+          <path d="M0,80 L900,65" fill="none" stroke="#f85149" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.6"/>
+          <defs>
+            <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#f97316"/>
+              <stop offset="100%" stop-color="#f97316" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- Month labels -->
+          <text x="0" y="158" fill="#6e7681" font-size="9">Jul</text>
+          <text x="75" y="158" fill="#6e7681" font-size="9">Aug</text>
+          <text x="150" y="158" fill="#6e7681" font-size="9">Sep</text>
+          <text x="225" y="158" fill="#6e7681" font-size="9">Oct</text>
+          <text x="300" y="158" fill="#6e7681" font-size="9">Nov</text>
+          <text x="375" y="158" fill="#6e7681" font-size="9">Dec</text>
+          <text x="450" y="158" fill="#6e7681" font-size="9">Jan</text>
+          <text x="525" y="158" fill="#6e7681" font-size="9">Feb</text>
+          <text x="600" y="158" fill="#6e7681" font-size="9">Mar</text>
+          <text x="675" y="158" fill="#6e7681" font-size="9">Apr</text>
+          <text x="750" y="158" fill="#6e7681" font-size="9">May</text>
+          <text x="825" y="158" fill="#6e7681" font-size="9">Jun</text>
+        </svg>
+      </div>
+
+      <!-- Geo / map card -->
+      <div class="geo-card">
+        <div class="geo-header">
+          <span class="geo-title">Production by Region — Heat Map</span>
+          <div class="geo-legend">
+            <div class="geo-leg-item"><div class="geo-leg-dot" style="background:#f97316"></div>High (&gt;90%)</div>
+            <div class="geo-leg-item"><div class="geo-leg-dot" style="background:#d29922"></div>Medium (70–90%)</div>
+            <div class="geo-leg-item"><div class="geo-leg-dot" style="background:#8b949e"></div>Low (&lt;70%)</div>
+          </div>
+        </div>
+        <div class="map-area">
+          <!-- Simple USA outline SVG approximation -->
+          <svg width="580" height="280" viewBox="0 0 580 280" class="map-svg">
+            <path d="M50,60 L530,60 L530,200 L420,200 L420,240 L320,240 L320,200 L200,200 L180,220 L100,220 L80,200 L50,200 Z"
+              fill="#21262d" stroke="#30363d" stroke-width="1.5"/>
+            <!-- State dividers (simplified) -->
+            <line x1="200" y1="60" x2="200" y2="200" stroke="#30363d" stroke-width="0.8"/>
+            <line x1="320" y1="60" x2="320" y2="200" stroke="#30363d" stroke-width="0.8"/>
+            <line x1="420" y1="60" x2="420" y2="200" stroke="#30363d" stroke-width="0.8"/>
+            <line x1="50" y1="140" x2="530" y2="140" stroke="#30363d" stroke-width="0.8"/>
+            <!-- Bubbles -->
+            <circle cx="460" cy="100" r="24" fill="rgba(249,115,22,0.3)" stroke="#f97316" stroke-width="2"/>
+            <text x="460" y="104" text-anchor="middle" fill="#f97316" font-size="11" font-weight="700">TX</text>
+            <circle cx="340" cy="100" r="18" fill="rgba(210,153,34,0.3)" stroke="#d29922" stroke-width="2"/>
+            <text x="340" y="104" text-anchor="middle" fill="#d29922" font-size="10" font-weight="700">OH</text>
+            <circle cx="240" cy="90" r="14" fill="rgba(139,148,158,0.3)" stroke="#8b949e" stroke-width="2"/>
+            <text x="240" y="94" text-anchor="middle" fill="#8b949e" font-size="9" font-weight="700">DE</text>
+            <circle cx="100" cy="110" r="16" fill="rgba(139,148,158,0.3)" stroke="#8b949e" stroke-width="2"/>
+            <text x="100" y="114" text-anchor="middle" fill="#8b949e" font-size="9" font-weight="700">CA</text>
+          </svg>
+          <div style="position:absolute;bottom:12px;right:12px;background:#161b22;border:1px solid #21262d;border-radius:6px;padding:8px;font-size:10px;color:#8b949e">
+            4 active sites · Click to drill down
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right -->
+    <div class="right-panel">
+      <div class="panel-section-title">Live Activity Feed</div>
+      <div class="activity-list">
+        <div class="activity-item">
+          <div class="activity-icon ai-green">✅</div>
+          <div class="activity-body">
+            <div class="activity-title">Line 4 — Batch #2841 Complete</div>
+            <div class="activity-sub">4,200 units · Texas Plant</div>
+            <div class="activity-time">2 min ago</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon ai-orange">⚠️</div>
+          <div class="activity-body">
+            <div class="activity-title">Inventory Alert — SKU-9921</div>
+            <div class="activity-sub">Stock below reorder level · Ohio</div>
+            <div class="activity-time">14 min ago</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon ai-blue">🚚</div>
+          <div class="activity-body">
+            <div class="activity-title">Shipment #TRK-8821 Departed</div>
+            <div class="activity-sub">1,840 units → Atlanta DC</div>
+            <div class="activity-time">31 min ago</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon ai-red">🔴</div>
+          <div class="activity-body">
+            <div class="activity-title">Maintenance — Press B Offline</div>
+            <div class="activity-sub">ETA back: 16:30 · Delaware</div>
+            <div class="activity-time">1 hr ago</div>
+          </div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-icon ai-green">📊</div>
+          <div class="activity-body">
+            <div class="activity-title">Daily Report Published</div>
+            <div class="activity-sub">Jun 20 · All Sites Summary</div>
+            <div class="activity-time">3 hrs ago</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-section-title">Efficiency Gauge</div>
+      <div class="gauge-section">
+        <div class="gauge-title">Overall Equipment Effectiveness</div>
+        <svg width="160" height="90" viewBox="0 0 160 90">
+          <!-- Arc background -->
+          <path d="M 20 80 A 60 60 0 0 1 140 80" fill="none" stroke="#21262d" stroke-width="14" stroke-linecap="round"/>
+          <!-- Arc fill (87.2%) -->
+          <path d="M 20 80 A 60 60 0 0 1 129 36" fill="none" stroke="url(#gaugeGrad)" stroke-width="14" stroke-linecap="round"/>
+          <defs>
+            <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#3fb950"/>
+              <stop offset="100%" stop-color="#f97316"/>
+            </linearGradient>
+          </defs>
+          <text x="80" y="72" text-anchor="middle" fill="#e6edf3" font-size="20" font-weight="800">87.2%</text>
+          <text x="80" y="85" text-anchor="middle" fill="#8b949e" font-size="9">OEE Score</text>
+          <text x="18" y="88" fill="#6e7681" font-size="8">0%</text>
+          <text x="132" y="88" fill="#6e7681" font-size="8">100%</text>
+        </svg>
+        <div style="display:flex;justify-content:center;gap:16px;margin-top:6px">
+          <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:#58a6ff">94%</div><div style="font-size:9px;color:#8b949e">Availability</div></div>
+          <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:#3fb950">96%</div><div style="font-size:9px;color:#8b949e">Performance</div></div>
+          <div style="text-align:center"><div style="font-size:16px;font-weight:700;color:#f97316">96%</div><div style="font-size:9px;color:#8b949e">Quality</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>Nexus Intelligence v3.1 · Data as of Jun 20, 2024 09:42 UTC</span>
+    <div class="status-pills">
+      <div class="status-pill"><div class="status-led led-green"></div>ERP Connected</div>
+      <div class="status-pill"><div class="status-led led-green"></div>IoT Stream Active</div>
+      <div class="status-pill"><div class="status-led led-yellow"></div>MES Delayed 4m</div>
+    </div>
+    <span>© 2024 Operations Intelligence · Confidential</span>
+  </div>
+
+</div>
+</body>
+</html>

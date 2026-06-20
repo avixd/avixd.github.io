@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Template 02 – Standard (1280×720)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+  body { background: #f0f2f5; display: flex; flex-direction: column; align-items: center; padding: 32px; gap: 24px; }
+  .label { color: #666; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+
+  .canvas {
+    width: 1280px; height: 720px; background: #f7f8fa;
+    border: 1px solid #dde1e7; border-radius: 10px; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+
+  /* Header */
+  .header {
+    height: 64px; background: #fff; border-bottom: 1px solid #e8eaed;
+    display: flex; align-items: center; justify-content: space-between; padding: 0 28px;
+    flex-shrink: 0;
+  }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .logo-box { width: 36px; height: 36px; background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-weight: 900; color: #fff; font-size: 16px; }
+  .brand-name { font-size: 18px; font-weight: 700; color: #1e293b; }
+  .brand-sub { font-size: 12px; color: #94a3b8; }
+  .header-right { display: flex; align-items: center; gap: 16px; }
+  .date-chip { background: #f1f5f9; color: #64748b; border-radius: 8px;
+    padding: 6px 14px; font-size: 12px; border: 1px solid #e2e8f0; }
+  .avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    display: flex; align-items: center; justify-content: center; color: #fff; font-size: 13px; font-weight: 700; }
+
+  /* Nav Tabs */
+  .nav { height: 42px; background: #fff; border-bottom: 1px solid #e8eaed;
+    display: flex; align-items: flex-end; padding: 0 28px; gap: 0; flex-shrink: 0; }
+  .tab { padding: 10px 18px; font-size: 13px; color: #64748b; cursor: pointer;
+    border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  .tab.active { color: #6366f1; border-bottom-color: #6366f1; font-weight: 600; }
+
+  /* Body layout */
+  .body { flex: 1; display: grid; grid-template-columns: 220px 1fr; overflow: hidden; }
+
+  /* Sidebar */
+  .sidebar { background: #fff; border-right: 1px solid #e8eaed; padding: 16px; overflow-y: auto; }
+  .sidebar-section { margin-bottom: 20px; }
+  .sidebar-title { font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; margin-bottom: 10px; }
+  .filter-label { font-size: 12px; color: #475569; margin-bottom: 4px; font-weight: 500; }
+  .filter-select { width: 100%; padding: 6px 8px; border: 1px solid #e2e8f0; border-radius: 6px;
+    background: #f8fafc; color: #334155; font-size: 12px; margin-bottom: 10px; }
+  .checkbox-group { display: flex; flex-direction: column; gap: 6px; }
+  .checkbox-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #475569; }
+  .cb { width: 14px; height: 14px; border: 1px solid #cbd5e1; border-radius: 3px;
+    background: #6366f1; display: flex; align-items: center; justify-content: center; }
+  .cb-empty { width: 14px; height: 14px; border: 1px solid #cbd5e1; border-radius: 3px; background: #fff; }
+  .sidebar-btn { width: 100%; padding: 8px; background: #6366f1; color: #fff;
+    border: none; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; margin-top: 8px; }
+
+  /* Main content */
+  .main { padding: 16px; display: flex; flex-direction: column; gap: 12px; overflow: hidden; }
+
+  /* KPI row */
+  .kpi-row { display: flex; gap: 12px; flex-shrink: 0; }
+  .kpi-card { flex: 1; background: #fff; border-radius: 10px; padding: 16px 18px;
+    border: 1px solid #e8eaed; }
+  .kpi-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .kpi-icon-wrap { width: 36px; height: 36px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center; font-size: 16px; }
+  .kpi-icon-wrap.purple { background: #ede9fe; }
+  .kpi-icon-wrap.blue { background: #dbeafe; }
+  .kpi-icon-wrap.green { background: #dcfce7; }
+  .kpi-icon-wrap.orange { background: #fff7ed; }
+  .kpi-label { font-size: 11px; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px; }
+  .kpi-value { font-size: 26px; font-weight: 800; color: #1e293b; }
+  .kpi-foot { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+  .kpi-badge { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+  .kpi-badge.up { background: #dcfce7; color: #16a34a; }
+  .kpi-badge.down { background: #fee2e2; color: #dc2626; }
+  .kpi-foot-text { font-size: 11px; color: #94a3b8; }
+
+  /* Chart panels */
+  .charts-row { flex: 1; display: grid; grid-template-columns: 1fr 0.45fr; gap: 12px; overflow: hidden; }
+  .chart-card { background: #fff; border-radius: 10px; border: 1px solid #e8eaed; padding: 16px; overflow: hidden; }
+  .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .chart-title { font-size: 13px; font-weight: 700; color: #1e293b; }
+  .chart-actions { display: flex; gap: 6px; }
+  .chart-btn { padding: 3px 10px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 11px; color: #64748b; cursor: pointer; }
+  .chart-btn.active { background: #6366f1; color: #fff; border-color: #6366f1; }
+
+  /* Bar chart */
+  .bar-area { display: flex; align-items: flex-end; gap: 8px; height: 150px; padding-bottom: 20px; position: relative; }
+  .bar-group { flex: 1; display: flex; align-items: flex-end; gap: 2px; }
+  .bar { border-radius: 3px 3px 0 0; }
+  .bar.a { background: #6366f1; width: 50%; }
+  .bar.b { background: #e0e7ff; width: 50%; }
+  .bar-x { position: absolute; bottom: 0; left: 0; right: 0; display: flex; }
+  .bar-x span { flex: 1; text-align: center; font-size: 9px; color: #94a3b8; }
+  .y-lines { position: absolute; top: 0; left: 0; right: 0; bottom: 20px; display: flex; flex-direction: column; justify-content: space-between; pointer-events: none; }
+  .y-line { border-top: 1px dashed #f1f5f9; width: 100%; }
+
+  /* Funnel */
+  .funnel { display: flex; flex-direction: column; gap: 8px; padding-top: 4px; }
+  .funnel-stage { display: flex; align-items: center; gap: 10px; }
+  .funnel-label { width: 72px; font-size: 11px; color: #64748b; text-align: right; flex-shrink: 0; }
+  .funnel-bar-wrap { flex: 1; height: 26px; background: #f8fafc; border-radius: 4px; overflow: hidden; }
+  .funnel-bar { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 8px; }
+  .funnel-bar span { font-size: 11px; font-weight: 700; color: #fff; }
+  .funnel-count { width: 40px; font-size: 11px; color: #94a3b8; text-align: right; flex-shrink: 0; }
+
+  /* Bottom row */
+  .bottom-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; flex-shrink: 0; }
+  .table-card { background: #fff; border-radius: 10px; border: 1px solid #e8eaed; padding: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  th { color: #94a3b8; font-weight: 600; text-align: left; padding: 6px 8px; border-bottom: 1px solid #f1f5f9; text-transform: uppercase; font-size: 10px; }
+  td { color: #475569; padding: 6px 8px; border-bottom: 1px solid #f8fafc; }
+  tr:last-child td { border-bottom: none; }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+  .sparkline { display: flex; align-items: flex-end; gap: 2px; height: 20px; }
+  .sp { border-radius: 1px; background: #6366f1; width: 4px; }
+
+  /* Footer */
+  .footer { height: 32px; background: #fff; border-top: 1px solid #e8eaed;
+    display: flex; align-items: center; justify-content: space-between; padding: 0 28px; flex-shrink: 0; }
+  .footer span { font-size: 10px; color: #94a3b8; }
+  .footer-pages { display: flex; gap: 4px; }
+  .page-dot { width: 6px; height: 6px; border-radius: 50%; background: #e2e8f0; }
+  .page-dot.active { background: #6366f1; }
+</style>
+</head>
+<body>
+<div class="label">Template 02 — Standard Dashboard · 1280 × 720px · Light Clean</div>
+<div class="canvas">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="brand">
+      <div class="logo-box">BI</div>
+      <div>
+        <div class="brand-name">Pulse Analytics</div>
+        <div class="brand-sub">Sales Performance Suite</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="date-chip">📅 Q2 2024 · Jan – Jun</div>
+      <div class="date-chip">🌍 All Regions ▾</div>
+      <div class="avatar">AD</div>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <div class="nav">
+    <div class="tab active">Overview</div>
+    <div class="tab">Revenue</div>
+    <div class="tab">Pipeline</div>
+    <div class="tab">Customers</div>
+    <div class="tab">Forecasting</div>
+  </div>
+
+  <!-- Body -->
+  <div class="body">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-title">Filters</div>
+        <div class="filter-label">Date Range</div>
+        <select class="filter-select"><option>Jan 2024 – Jun 2024</option></select>
+        <div class="filter-label">Region</div>
+        <select class="filter-select"><option>All Regions</option></select>
+        <div class="filter-label">Product Line</div>
+        <select class="filter-select"><option>All Products</option></select>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Segments</div>
+        <div class="checkbox-group">
+          <div class="checkbox-item"><div class="cb">✓</div> Enterprise</div>
+          <div class="checkbox-item"><div class="cb">✓</div> Mid-Market</div>
+          <div class="checkbox-item"><div class="cb">✓</div> SMB</div>
+          <div class="checkbox-item"><div class="cb-empty"></div> Partners</div>
+        </div>
+      </div>
+      <button class="sidebar-btn">Apply Filters</button>
+      <button class="sidebar-btn" style="background:#f1f5f9;color:#64748b;margin-top:6px">Reset</button>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+
+      <!-- KPIs -->
+      <div class="kpi-row">
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <div>
+              <div class="kpi-label">Total Revenue</div>
+              <div class="kpi-value">$8.4M</div>
+            </div>
+            <div class="kpi-icon-wrap purple">💰</div>
+          </div>
+          <div class="kpi-foot">
+            <span class="kpi-badge up">▲ 14.2%</span>
+            <span class="kpi-foot-text">vs same period LY</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <div>
+              <div class="kpi-label">New Customers</div>
+              <div class="kpi-value">342</div>
+            </div>
+            <div class="kpi-icon-wrap blue">👥</div>
+          </div>
+          <div class="kpi-foot">
+            <span class="kpi-badge up">▲ 8.7%</span>
+            <span class="kpi-foot-text">vs same period LY</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <div>
+              <div class="kpi-label">Win Rate</div>
+              <div class="kpi-value">41.8%</div>
+            </div>
+            <div class="kpi-icon-wrap green">🎯</div>
+          </div>
+          <div class="kpi-foot">
+            <span class="kpi-badge down">▼ 1.3 pts</span>
+            <span class="kpi-foot-text">vs target 43%</span>
+          </div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-top">
+            <div>
+              <div class="kpi-label">Pipeline Value</div>
+              <div class="kpi-value">$21.6M</div>
+            </div>
+            <div class="kpi-icon-wrap orange">📈</div>
+          </div>
+          <div class="kpi-foot">
+            <span class="kpi-badge up">▲ 22.5%</span>
+            <span class="kpi-foot-text">coverage 2.6x quota</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts row -->
+      <div class="charts-row">
+
+        <!-- Bar chart -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <span class="chart-title">Monthly Revenue vs Target</span>
+            <div class="chart-actions">
+              <span class="chart-btn active">Bar</span>
+              <span class="chart-btn">Line</span>
+              <span class="chart-btn">Area</span>
+            </div>
+          </div>
+          <div class="bar-area">
+            <div class="y-lines"><div class="y-line"></div><div class="y-line"></div><div class="y-line"></div><div class="y-line"></div></div>
+            <div class="bar-group"><div class="bar a" style="height:90px"></div><div class="bar b" style="height:100px"></div></div>
+            <div class="bar-group"><div class="bar a" style="height:110px"></div><div class="bar b" style="height:100px"></div></div>
+            <div class="bar-group"><div class="bar a" style="height:95px"></div><div class="bar b" style="height:100px"></div></div>
+            <div class="bar-group"><div class="bar a" style="height:130px"></div><div class="bar b" style="height:115px"></div></div>
+            <div class="bar-group"><div class="bar a" style="height:125px"></div><div class="bar b" style="height:120px"></div></div>
+            <div class="bar-group"><div class="bar a" style="height:145px"></div><div class="bar b" style="height:130px"></div></div>
+            <div class="bar-x"><span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span></div>
+          </div>
+          <div style="display:flex;gap:16px;margin-top:4px">
+            <div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#64748b">
+              <div style="width:10px;height:10px;border-radius:2px;background:#6366f1"></div>Actual
+            </div>
+            <div style="display:flex;align-items:center;gap:4px;font-size:11px;color:#64748b">
+              <div style="width:10px;height:10px;border-radius:2px;background:#e0e7ff"></div>Target
+            </div>
+          </div>
+        </div>
+
+        <!-- Funnel -->
+        <div class="chart-card">
+          <div class="chart-header">
+            <span class="chart-title">Sales Funnel</span>
+          </div>
+          <div class="funnel">
+            <div class="funnel-stage">
+              <div class="funnel-label">Leads</div>
+              <div class="funnel-bar-wrap">
+                <div class="funnel-bar" style="width:100%;background:#6366f1"><span>2,840</span></div>
+              </div>
+              <div class="funnel-count">100%</div>
+            </div>
+            <div class="funnel-stage">
+              <div class="funnel-label">Qualified</div>
+              <div class="funnel-bar-wrap">
+                <div class="funnel-bar" style="width:72%;background:#818cf8"><span>2,045</span></div>
+              </div>
+              <div class="funnel-count">72%</div>
+            </div>
+            <div class="funnel-stage">
+              <div class="funnel-label">Proposed</div>
+              <div class="funnel-bar-wrap">
+                <div class="funnel-bar" style="width:48%;background:#a5b4fc"><span>1,363</span></div>
+              </div>
+              <div class="funnel-count">48%</div>
+            </div>
+            <div class="funnel-stage">
+              <div class="funnel-label">Negotiating</div>
+              <div class="funnel-bar-wrap">
+                <div class="funnel-bar" style="width:26%;background:#c7d2fe"><span>738</span></div>
+              </div>
+              <div class="funnel-count">26%</div>
+            </div>
+            <div class="funnel-stage">
+              <div class="funnel-label">Won</div>
+              <div class="funnel-bar-wrap">
+                <div class="funnel-bar" style="width:16%;background:#e0e7ff;"><span style="color:#6366f1">455</span></div>
+              </div>
+              <div class="funnel-count">16%</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom row -->
+      <div class="bottom-row">
+        <div class="table-card">
+          <div style="font-size:12px;font-weight:700;color:#1e293b;margin-bottom:10px">Top Reps Performance</div>
+          <table>
+            <tr><th>Rep</th><th>Revenue</th><th>Deals</th><th>Trend</th></tr>
+            <tr>
+              <td><span class="status-dot" style="background:#16a34a"></span>J. Martinez</td>
+              <td>$1.24M</td><td>38</td>
+              <td><div class="sparkline"><div class="sp" style="height:8px"></div><div class="sp" style="height:12px"></div><div class="sp" style="height:10px"></div><div class="sp" style="height:16px"></div><div class="sp" style="height:20px"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="status-dot" style="background:#16a34a"></span>S. Patel</td>
+              <td>$1.18M</td><td>34</td>
+              <td><div class="sparkline"><div class="sp" style="height:10px"></div><div class="sp" style="height:8px"></div><div class="sp" style="height:14px"></div><div class="sp" style="height:12px"></div><div class="sp" style="height:18px"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="status-dot" style="background:#f59e0b"></span>R. Kim</td>
+              <td>$892K</td><td>27</td>
+              <td><div class="sparkline"><div class="sp" style="height:14px;background:#f59e0b"></div><div class="sp" style="height:10px;background:#f59e0b"></div><div class="sp" style="height:12px;background:#f59e0b"></div><div class="sp" style="height:8px;background:#f59e0b"></div><div class="sp" style="height:10px;background:#f59e0b"></div></div></td>
+            </tr>
+            <tr>
+              <td><span class="status-dot" style="background:#dc2626"></span>A. Chen</td>
+              <td>$644K</td><td>19</td>
+              <td><div class="sparkline"><div class="sp" style="height:18px;background:#dc2626"></div><div class="sp" style="height:14px;background:#dc2626"></div><div class="sp" style="height:10px;background:#dc2626"></div><div class="sp" style="height:8px;background:#dc2626"></div><div class="sp" style="height:6px;background:#dc2626"></div></div></td>
+            </tr>
+          </table>
+        </div>
+        <div class="table-card">
+          <div style="font-size:12px;font-weight:700;color:#1e293b;margin-bottom:10px">Regional Breakdown</div>
+          <table>
+            <tr><th>Region</th><th>Revenue</th><th>Quota %</th><th>vs LY</th></tr>
+            <tr><td>North America</td><td>$3.8M</td><td>108%</td><td style="color:#16a34a">+18%</td></tr>
+            <tr><td>EMEA</td><td>$2.4M</td><td>96%</td><td style="color:#f59e0b">+4%</td></tr>
+            <tr><td>APAC</td><td>$1.6M</td><td>112%</td><td style="color:#16a34a">+31%</td></tr>
+            <tr><td>LATAM</td><td>$0.6M</td><td>84%</td><td style="color:#dc2626">-7%</td></tr>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>Data refreshed: Jun 20, 2024 · 09:42 AM UTC · Source: Salesforce + NetSuite</span>
+    <div class="footer-pages">
+      <div class="page-dot active"></div><div class="page-dot"></div><div class="page-dot"></div><div class="page-dot"></div>
+    </div>
+    <span>Pulse Analytics v2.4 · Confidential</span>
+  </div>
+
+</div>
+</body>
+</html>

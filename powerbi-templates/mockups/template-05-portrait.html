@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Template 05 – Portrait/Mobile (768×1024)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+  body { background: #f8f9fb; display: flex; flex-direction: column; align-items: center; padding: 32px; gap: 24px; }
+  .label { color: #666; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; }
+
+  .canvas {
+    width: 768px; height: 1024px; background: #ffffff;
+    border: 1px solid #e8eaed; border-radius: 12px; overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+
+  /* Header */
+  .header { height: 60px; background: #1a1a2e; display: flex; align-items: center;
+    justify-content: space-between; padding: 0 20px; flex-shrink: 0; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .logo { width: 34px; height: 34px; background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    font-weight: 900; color: #fff; font-size: 15px; }
+  .brand-name { font-size: 16px; font-weight: 700; color: #fff; }
+  .brand-sub { font-size: 10px; color: #8892b0; }
+  .header-right { display: flex; align-items: center; gap: 8px; }
+  .hbadge { background: rgba(255,107,107,0.2); color: #ff6b6b; border: 1px solid rgba(255,107,107,0.3);
+    border-radius: 6px; padding: 4px 10px; font-size: 11px; }
+
+  /* Summary strip */
+  .summary { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    padding: 16px 20px; flex-shrink: 0; }
+  .summary-title { font-size: 11px; color: rgba(255,255,255,0.7); text-transform: uppercase; letter-spacing: 0.8px; }
+  .summary-value { font-size: 32px; font-weight: 800; color: #fff; margin: 4px 0; }
+  .summary-row { display: flex; gap: 16px; margin-top: 6px; }
+  .summary-stat { background: rgba(0,0,0,0.15); border-radius: 8px; padding: 6px 12px; }
+  .ss-label { font-size: 9px; color: rgba(255,255,255,0.6); }
+  .ss-value { font-size: 13px; font-weight: 700; color: #fff; }
+
+  /* KPI grid */
+  .kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #f0f2f5; flex-shrink: 0; }
+  .kpi-cell { background: #fff; padding: 14px 16px; }
+  .kc-icon { font-size: 20px; margin-bottom: 6px; }
+  .kc-label { font-size: 10px; color: #9ca3af; text-transform: uppercase; letter-spacing: 0.6px; }
+  .kc-value { font-size: 20px; font-weight: 800; color: #1f2937; margin: 2px 0; }
+  .kc-delta { font-size: 11px; }
+  .delta-up { color: #059669; }
+  .delta-dn { color: #dc2626; }
+
+  /* Section */
+  .section { padding: 16px 20px; flex-shrink: 0; }
+  .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .section-title { font-size: 13px; font-weight: 700; color: #1f2937; }
+  .section-link { font-size: 11px; color: #ff6b6b; }
+  .divider { height: 6px; background: #f0f2f5; flex-shrink: 0; }
+
+  /* Horizontal bar chart */
+  .hbar-list { display: flex; flex-direction: column; gap: 10px; }
+  .hbar-item { display: flex; align-items: center; gap: 10px; }
+  .hbar-label { width: 80px; font-size: 11px; color: #6b7280; text-align: right; flex-shrink: 0; }
+  .hbar-track { flex: 1; height: 22px; background: #f9fafb; border-radius: 6px; overflow: hidden; border: 1px solid #f3f4f6; }
+  .hbar-fill { height: 100%; border-radius: 6px; display: flex; align-items: center; padding-left: 8px; }
+  .hbar-fill span { font-size: 11px; font-weight: 700; color: #fff; }
+  .hbar-pct { width: 38px; font-size: 11px; color: #9ca3af; text-align: right; flex-shrink: 0; }
+
+  /* Trend list */
+  .trend-list { display: flex; flex-direction: column; gap: 0; }
+  .trend-item { display: flex; align-items: center; gap: 12px; padding: 10px 0;
+    border-bottom: 1px solid #f3f4f6; }
+  .trend-item:last-child { border-bottom: none; }
+  .trend-rank { width: 24px; height: 24px; background: #f9fafb; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #6b7280; flex-shrink: 0; }
+  .trend-rank.top { background: linear-gradient(135deg,#ff6b6b,#ee5a24); color: #fff; }
+  .trend-info { flex: 1; }
+  .trend-name { font-size: 12px; font-weight: 600; color: #1f2937; }
+  .trend-sub { font-size: 11px; color: #9ca3af; margin-top: 1px; }
+  .trend-value { font-size: 13px; font-weight: 700; color: #1f2937; }
+  .trend-delta { font-size: 10px; text-align: right; }
+
+  /* Donut row */
+  .donut-row { display: flex; gap: 16px; justify-content: center; }
+  .donut-item { text-align: center; }
+  .donut-sub { font-size: 10px; color: #9ca3af; margin-top: 4px; }
+
+  /* Footer */
+  .footer { margin-top: auto; height: 40px; background: #1a1a2e;
+    display: flex; align-items: center; justify-content: space-between; padding: 0 20px; flex-shrink: 0; }
+  .footer span { font-size: 10px; color: #4a5568; }
+  .footer-dots { display: flex; gap: 4px; }
+  .fdot { width: 6px; height: 6px; border-radius: 50%; background: #2d3748; }
+  .fdot.active { background: #ff6b6b; }
+</style>
+</head>
+<body>
+<div class="label">Template 05 — Portrait / Tablet · 768 × 1024px · Warm Report</div>
+<div class="canvas">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="brand">
+      <div class="logo">R</div>
+      <div>
+        <div class="brand-name">ReportFlow</div>
+        <div class="brand-sub">Monthly Business Review</div>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="hbadge">Jun 2024</div>
+    </div>
+  </div>
+
+  <!-- Summary hero -->
+  <div class="summary">
+    <div class="summary-title">Total Revenue YTD</div>
+    <div class="summary-value">$6,824,100</div>
+    <div class="summary-row">
+      <div class="summary-stat"><div class="ss-label">vs Plan</div><div class="ss-value">+7.2%</div></div>
+      <div class="summary-stat"><div class="ss-label">vs LY</div><div class="ss-value">+14.8%</div></div>
+      <div class="summary-stat"><div class="ss-label">Remaining</div><div class="ss-value">$3.17M</div></div>
+      <div class="summary-stat"><div class="ss-label">Forecast</div><div class="ss-value">$10.1M</div></div>
+    </div>
+  </div>
+
+  <!-- KPI grid -->
+  <div class="kpi-grid">
+    <div class="kpi-cell">
+      <div class="kc-icon">📦</div>
+      <div class="kc-label">Orders</div>
+      <div class="kc-value">2,841</div>
+      <div class="kc-delta delta-up">▲ 9.2% vs LM</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kc-icon">💳</div>
+      <div class="kc-label">Avg Order</div>
+      <div class="kc-value">$2,402</div>
+      <div class="kc-delta delta-up">▲ 5.1% vs LM</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kc-icon">👤</div>
+      <div class="kc-label">New Customers</div>
+      <div class="kc-value">184</div>
+      <div class="kc-delta delta-dn">▼ 2.4% vs LM</div>
+    </div>
+    <div class="kpi-cell">
+      <div class="kc-icon">⭐</div>
+      <div class="kc-label">Satisfaction</div>
+      <div class="kc-value">4.7/5</div>
+      <div class="kc-delta delta-up">▲ 0.2 pts</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Revenue by channel -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Revenue by Channel</span>
+      <span class="section-link">View All ›</span>
+    </div>
+    <div class="hbar-list">
+      <div class="hbar-item">
+        <div class="hbar-label">Direct</div>
+        <div class="hbar-track"><div class="hbar-fill" style="width:85%;background:linear-gradient(90deg,#ff6b6b,#ee5a24)"><span>$2.84M</span></div></div>
+        <div class="hbar-pct">85%</div>
+      </div>
+      <div class="hbar-item">
+        <div class="hbar-label">Partners</div>
+        <div class="hbar-track"><div class="hbar-fill" style="width:58%;background:linear-gradient(90deg,#f7971e,#ffd200)"><span>$1.96M</span></div></div>
+        <div class="hbar-pct">58%</div>
+      </div>
+      <div class="hbar-item">
+        <div class="hbar-label">Online</div>
+        <div class="hbar-track"><div class="hbar-fill" style="width:44%;background:linear-gradient(90deg,#11998e,#38ef7d)"><span>$1.48M</span></div></div>
+        <div class="hbar-pct">44%</div>
+      </div>
+      <div class="hbar-item">
+        <div class="hbar-label">Resellers</div>
+        <div class="hbar-track"><div class="hbar-fill" style="width:27%;background:linear-gradient(90deg,#8e2de2,#4a00e0)"><span>$0.91M</span></div></div>
+        <div class="hbar-pct">27%</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Top products -->
+  <div class="section">
+    <div class="section-header">
+      <span class="section-title">Top Products</span>
+      <span class="section-link">Full Table ›</span>
+    </div>
+    <div class="trend-list">
+      <div class="trend-item">
+        <div class="trend-rank top">1</div>
+        <div class="trend-info"><div class="trend-name">Enterprise Suite Pro</div><div class="trend-sub">Software · 342 licenses</div></div>
+        <div style="text-align:right"><div class="trend-value">$1.24M</div><div class="trend-delta delta-up">▲ 22%</div></div>
+      </div>
+      <div class="trend-item">
+        <div class="trend-rank top">2</div>
+        <div class="trend-info"><div class="trend-name">Analytics Module</div><div class="trend-sub">Software · 218 licenses</div></div>
+        <div style="text-align:right"><div class="trend-value">$894K</div><div class="trend-delta delta-up">▲ 14%</div></div>
+      </div>
+      <div class="trend-item">
+        <div class="trend-rank">3</div>
+        <div class="trend-info"><div class="trend-name">Implementation Services</div><div class="trend-sub">Services · 47 projects</div></div>
+        <div style="text-align:right"><div class="trend-value">$682K</div><div class="trend-delta delta-dn">▼ 3%</div></div>
+      </div>
+      <div class="trend-item">
+        <div class="trend-rank">4</div>
+        <div class="trend-info"><div class="trend-name">Hardware Bundle X1</div><div class="trend-sub">Hardware · 124 units</div></div>
+        <div style="text-align:right"><div class="trend-value">$441K</div><div class="trend-delta delta-dn">▼ 11%</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <span>ReportFlow · Jun 2024 MBR · Refreshed 09:42</span>
+    <div class="footer-dots">
+      <div class="fdot active"></div><div class="fdot"></div><div class="fdot"></div>
+    </div>
+    <span>Page 1 of 4</span>
+  </div>
+
+</div>
+</body>
+</html>
