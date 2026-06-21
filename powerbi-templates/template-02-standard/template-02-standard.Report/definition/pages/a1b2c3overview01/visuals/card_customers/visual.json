@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
   "name": "card_customers",
   "position": {
-    "x": 640,
-    "y": 16,
+    "x": 644,
+    "y": 96,
     "z": 1002,
-    "height": 80,
-    "width": 300,
+    "height": 84,
+    "width": 306,
     "tabOrder": 1002
   },
   "visual": {
@@ -42,7 +42,7 @@
                 "color": {
                   "expr": {
                     "Literal": {
-                      "Value": "'#1E293B'"
+                      "Value": "'#F59E0B'"
                     }
                   }
                 }
@@ -100,6 +100,13 @@
                       "Value": "'#FFFFFF'"
                     }
                   }
+                }
+              }
+            },
+            "transparency": {
+              "expr": {
+                "Literal": {
+                  "Value": "0D"
                 }
               }
             }

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "text_app_title",
+  "position": {
+    "x": 52,
+    "y": 12,
+    "z": 300,
+    "height": 24,
+    "width": 400,
+    "tabOrder": 300
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {},
+    "innerText": "{\"dataState\":{\"objects\":{}},\"paragraphs\":[{\"textRuns\":[{\"value\":\"Executive Dashboard\",\"textStyle\":{\"fontFamily\":\"Segoe UI\",\"fontSize\":\"14pt\",\"bold\":true,\"color\":\"#FFFFFF\"}}],\"horizontalTextAlignment\":\"left\"}]}"
+  }
+}

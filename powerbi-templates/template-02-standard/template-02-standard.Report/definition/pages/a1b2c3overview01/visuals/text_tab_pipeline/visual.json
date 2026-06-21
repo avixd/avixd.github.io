@@ -1,0 +1,17 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "text_tab_pipeline",
+  "position": {
+    "x": 252,
+    "y": 54,
+    "z": 312,
+    "height": 24,
+    "width": 104,
+    "tabOrder": 312
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {},
+    "innerText": "{\"dataState\":{\"objects\":{}},\"paragraphs\":[{\"textRuns\":[{\"value\":\"Pipeline\",\"textStyle\":{\"fontFamily\":\"Segoe UI\",\"fontSize\":\"9pt\",\"bold\":false,\"color\":\"#A5B4FC\"}}],\"horizontalTextAlignment\":\"center\"}]}"
+  }
+}

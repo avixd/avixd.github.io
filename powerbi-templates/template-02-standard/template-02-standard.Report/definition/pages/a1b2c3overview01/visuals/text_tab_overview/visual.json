@@ -1,0 +1,17 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.0.0/schema.json",
+  "name": "text_tab_overview",
+  "position": {
+    "x": 8,
+    "y": 54,
+    "z": 310,
+    "height": 24,
+    "width": 116,
+    "tabOrder": 310
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {},
+    "innerText": "{\"dataState\":{\"objects\":{}},\"paragraphs\":[{\"textRuns\":[{\"value\":\"Overview\",\"textStyle\":{\"fontFamily\":\"Segoe UI\",\"fontSize\":\"9pt\",\"bold\":true,\"color\":\"#FFFFFF\"}}],\"horizontalTextAlignment\":\"center\"}]}"
+  }
+}

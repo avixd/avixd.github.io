@@ -3,10 +3,10 @@
   "name": "chart_col_revenue",
   "position": {
     "x": 16,
-    "y": 108,
+    "y": 192,
     "z": 2000,
-    "height": 290,
-    "width": 636,
+    "height": 228,
+    "width": 620,
     "tabOrder": 2000
   },
   "visual": {
