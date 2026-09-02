@@ -1,5 +1,46 @@
 window.scrollTo(0, 0);
 
+/* ── Theme toggle (light / dark) ── */
+const root = document.documentElement;
+const themeToggle = document.getElementById('themeToggle');
+const themeColorMeta = document.getElementById('themeColorMeta');
+
+const THEME_COLORS = { dark: '#0a0a0f', light: '#fbfcfe' };
+
+function applyTheme(theme, { animate = false } = {}) {
+  if (animate) {
+    root.classList.add('theme-switching');
+    window.setTimeout(() => root.classList.remove('theme-switching'), 340);
+  }
+
+  root.setAttribute('data-theme', theme);
+  if (themeColorMeta) themeColorMeta.setAttribute('content', THEME_COLORS[theme]);
+  if (themeToggle) {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    themeToggle.setAttribute('aria-label', `Switch to ${next} theme`);
+  }
+}
+
+// Sync UI with the theme the inline <head> script already applied
+applyTheme(root.getAttribute('data-theme') || 'dark');
+
+themeToggle?.addEventListener('click', () => {
+  const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  applyTheme(next, { animate: true });
+  try { localStorage.setItem('theme', next); } catch { /* storage unavailable */ }
+});
+
+// Follow the OS preference until the visitor makes an explicit choice
+window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+  let hasChoice = false;
+  try { hasChoice = !!localStorage.getItem('theme'); } catch { /* storage unavailable */ }
+  if (!hasChoice) applyTheme(e.matches ? 'light' : 'dark', { animate: true });
+});
+
+/* ── Footer year ── */
+const footerYear = document.getElementById('footerYear');
+if (footerYear) footerYear.textContent = String(new Date().getFullYear());
+
 /* ── Nav scroll effect ── */
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
@@ -11,14 +52,16 @@ const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
 hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
+  const open = hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open', open);
+  hamburger.setAttribute('aria-expanded', String(open));
 });
 
 document.querySelectorAll('.mobile-link').forEach(link => {
   link.addEventListener('click', () => {
     hamburger.classList.remove('open');
     mobileMenu.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
   });
 });
 
@@ -48,9 +91,9 @@ if (skillsPanel) skillIO.observe(skillsPanel);
 
 /* ── Add fade-up to sections ── */
 const animTargets = [
-  '.hero-badge', '.hero-title', '.hero-sub', '.hero-actions', '.hero-certs',
+  '.hero-badge', '.hero-title', '.hero-sub', '.hero-actions', '.hero-stats',
   '.chart-card', '.about-text', '.skills-panel',
-  '.project-card', '.service-card', '.channel-card', '.contact-form',
+  '.project-card', '.cert-card', '.service-card', '.channel-card', '.contact-form',
 ];
 animTargets.forEach(sel => {
   document.querySelectorAll(sel).forEach((el, i) => {
@@ -108,11 +151,11 @@ form.addEventListener('submit', async (e) => {
       form.reset();
     } else {
       formNote.textContent = '✗ Something went wrong — please email me directly at dudaniavinash24@gmail.com';
-      formNote.style.color = '#f87171';
+      formNote.style.color = 'var(--danger)';
     }
   } catch {
     formNote.textContent = '✗ Network error — please try again or email dudaniavinash24@gmail.com';
-    formNote.style.color = '#f87171';
+    formNote.style.color = 'var(--danger)';
   }
 
   btn.textContent = 'Send message';

@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Avinash Dudani — Data Analyst</title>
+  <title>Avinash Dudani — Data Analytics &amp; Insights Manager</title>
+  <meta name="description" content="Avinash Dudani — Data Analytics &amp; Insights Manager specialising in Microsoft Fabric, Power BI and agentic automation. 5× Microsoft Certified, 2× Fabric Super User. Serving 200+ users across 75+ dashboards." />
+  <meta name="theme-color" content="#0a0a0f" id="themeColorMeta" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -11,6 +13,16 @@
   <script>
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     if (location.hash) history.replaceState(null, '', location.pathname + location.search);
+    /* Apply the saved/system theme before first paint to avoid a flash */
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
   </script>
 </head>
 <body>
@@ -22,15 +34,32 @@
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#certifications">Professional Development</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+
+      <button class="theme-toggle" id="themeToggle" type="button"
+              aria-label="Switch to light theme" title="Switch theme">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.5" />
+          <path d="M12 1.5v2M12 20.5v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1.5 12h2M20.5 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+        </svg>
+      </button>
+
+      <button class="nav-hamburger" id="hamburger" aria-label="Open menu"
+              aria-expanded="false" aria-controls="mobileMenu">
         <span></span><span></span><span></span>
       </button>
     </div>
     <div class="nav-mobile" id="mobileMenu">
       <a href="#about" class="mobile-link">About</a>
       <a href="#portfolio" class="mobile-link">Portfolio</a>
+      <a href="#certifications" class="mobile-link">Professional Development</a>
       <a href="#contact" class="mobile-link">Contact</a>
     </div>
   </nav>
@@ -47,26 +76,46 @@
       </div>
       <a class="hero-badge" href="#contact">
         <span class="badge-dot"></span>
-        Available for freelance projects
+        Open to consulting engagements &amp; new opportunities
       </a>
       <h1 class="hero-title">
         Turning data into<br />
         <span class="gradient-text">decisions that matter</span>
       </h1>
       <p class="hero-sub">
-        Data Analytics &amp; Insights Manager, Retail Strategy<br />
-        Ex-Fabric Super User · Fabric Workloads Proficiency · Agentic Development · Azure Services Implementation
+        <strong>Data Analytics &amp; Insights Manager</strong> — I build teams that tell stories with data,
+        turning retail strategy, forecasting and P&amp;L questions into governed, self-serve
+        Microsoft Fabric solutions that leaders actually act on.
       </p>
       <div class="hero-actions">
         <a class="btn-primary" href="#portfolio">View my work</a>
         <a class="btn-ghost" href="#contact">Get in touch</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="hero-stat-val">200+</div>
+          <div class="hero-stat-label">business users served internationally</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">75+</div>
+          <div class="hero-stat-label">Power BI dashboards &amp; Fabric apps</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">87%</div>
+          <div class="hero-stat-label">average user satisfaction score</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hero-stat-val">5×</div>
+          <div class="hero-stat-label">Microsoft Certified · 2× Fabric Super User</div>
+        </div>
       </div>
     </div>
     <div class="hero-visual">
       <div class="chart-card">
         <div class="chart-header">
           <span class="chart-title">Revenue YTD vs Prior Year</span>
-          <span class="chart-badge">Power BI</span>
+          <span class="chart-badge">Sample</span>
         </div>
         <div class="bars">
           <div class="bar-group">
@@ -99,6 +148,7 @@
           <div class="kpi"><div class="kpi-val">$2.4M</div><div class="kpi-label">Total Revenue</div></div>
           <div class="kpi"><div class="kpi-val">94.2%</div><div class="kpi-label">Target Hit</div></div>
         </div>
+        <p class="chart-note">*For Illustrative Purposes Only</p>
       </div>
     </div>
   </section>
@@ -109,10 +159,17 @@
       <div class="section-label">About me</div>
       <div class="about-grid">
         <div class="about-text">
-          <h2 class="section-title">Data analyst who<br /><span class="gradient-text">speaks business</span></h2>
-          <p>I'm Avinash Dudani — a Data Analyst at <strong>Canadian Forces Morale and Welfare Services</strong> with a passion for turning messy datasets into clear, actionable intelligence.</p>
-          <p>I'm also a <strong>Microsoft Fabric Community Superuser</strong>, YouTube content creator at <a href="https://youtube.com/@Empower_Data" target="_blank" rel="noopener">@Empower_Data</a>, and a freelance BI consultant on Fiverr and TopMate.</p>
-          <p>My focus areas span end-to-end BI delivery — from data modelling in Power BI and DAX optimisation, to cloud pipelines on Azure and Python-driven analytics.</p>
+          <h2 class="section-title">Analytics leader who<br /><span class="gradient-text">speaks business</span></h2>
+          <p>I'm Avinash Dudani — a strategic <strong>Data Analytics Manager</strong> who builds teams that tell stories with data. I deliver sustainable, scalable analytical solutions that enable <strong>data-driven decision-making</strong>, improve the <strong>P&amp;L</strong>, and strengthen customer engagement.</p>
+          <p>I manage analytical portfolios end to end using <strong>agile frameworks</strong> — partnering with executives and stakeholders to translate long-term vision into a prioritised roadmap, then optimising the processes and projects that deliver it. My work spans <strong>retail strategy, forecasting, P&amp;L management and change management</strong>, underpinned by <strong>data governance, ingestion, orchestration, quality assurance and dimensional modelling</strong>.</p>
+          <p>Technically, I work across the <strong>Microsoft Fabric</strong> and <strong>Power BI</strong> stack — DAX, Power Query (M), T-SQL, Python and PySpark, Data Factory — and increasingly build <strong>agentic, decision-support solutions</strong> with Copilot Studio, Power Automate and the wider Power Platform, so insight triggers action instead of waiting to be noticed.</p>
+          <p><strong>5× Microsoft Certified</strong> and a <strong>2× Fabric Super User</strong>, I share what I learn at <a href="https://youtube.com/@Empower_Data" target="_blank" rel="noopener">@Empower_Data</a>.</p>
+
+          <div class="about-cta">
+            <p><strong>Hiring for an analytics leader, or need a partner to make your data estate decision-ready?</strong> I take on consulting engagements and 1:1 advisory alongside my day role.</p>
+            <a class="about-cta-link" href="#contact">Start a conversation →</a>
+          </div>
+
           <div class="about-links">
             <a class="icon-link" href="https://github.com/avixd" target="_blank" rel="noopener">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.1 3.3 9.42 7.88 10.94.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.28-1.68-1.28-1.68-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.68 1.24 3.34.95.1-.74.4-1.24.72-1.52-2.55-.29-5.23-1.28-5.23-5.68 0-1.26.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.15 1.18a10.9 10.9 0 0 1 2.87-.39c.97 0 1.95.13 2.87.39 2.18-1.49 3.14-1.18 3.14-1.18.62 1.58.23 2.75.11 3.04.74.8 1.18 1.82 1.18 3.08 0 4.41-2.69 5.38-5.25 5.67.41.36.78 1.07.78 2.15v3.19c0 .31.21.67.8.56A10.51 10.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
@@ -135,15 +192,21 @@
             <div class="exp-chip">
               <div class="exp-chip-top">
                 <div>
-                  <div class="exp-role">Data Analyst</div>
-                  <div class="exp-org">CFMWS – CANEX &nbsp;·&nbsp; Ottawa, Canada</div>
+                  <div class="exp-role">CFMWS – CANEX</div>
+                  <div class="exp-org">Ottawa, Canada</div>
                 </div>
                 <div class="exp-period">Jul 2022 – Present</div>
               </div>
-              <ul class="exp-chip-list">
-                <li>Architected Microsoft Fabric &amp; Azure analytical workloads across a multi-store retail portfolio, enabling executive-level strategic recommendations.</li>
-                <li>Led marketing analytics initiatives that improved YoY incremental sales by 7%.</li>
-              </ul>
+              <ol class="exp-progression">
+                <li class="exp-prog-row is-current">
+                  <span class="exp-prog-role">Manager – Data Analytics &amp; Insights</span>
+                  <span class="exp-prog-period">Nov 2025 – Present</span>
+                </li>
+                <li class="exp-prog-row">
+                  <span class="exp-prog-role">Data Analyst</span>
+                  <span class="exp-prog-period">Jul 2022 – Nov 2025</span>
+                </li>
+              </ol>
             </div>
 
             <div class="exp-chip">
@@ -155,23 +218,27 @@
                 <div class="exp-period">Sep 2021 – Jun 2022</div>
               </div>
               <ul class="exp-chip-list">
-                <li>Built Power BI dashboards tracking ~$3B in Assets Under Management using SQL, supporting high-stakes investment decisions.</li>
-                <li>Automated ~10 hrs/month of manual workflows using Python, freeing analyst capacity for higher-value analysis.</li>
+                <li>Tracked and analysed ~$3B in Assets Under Management to guide strategic purchasing decisions.</li>
+                <li>Built a procurement decision-support dashboard that cut procure-to-pay cycle times by 5%.</li>
               </ul>
             </div>
 
             <div class="exp-chip">
               <div class="exp-chip-top">
                 <div>
-                  <div class="exp-role">Inventory Control Coordinator</div>
-                  <div class="exp-org">Good Food Market &nbsp;·&nbsp; Montreal, Canada</div>
+                  <div class="exp-role">Early experience</div>
                 </div>
-                <div class="exp-period">Dec 2020 – Aug 2021</div>
               </div>
-              <ul class="exp-chip-list">
-                <li>Designed Power BI solutions improving on-hand inventory accuracy by 5% and reducing overhead by 3% through QoQ turnover analysis.</li>
-                <li>Translated supply chain data into actionable process improvements with measurable cross-functional impact.</li>
-              </ul>
+              <div class="exp-early">
+                <div class="exp-early-row">
+                  <span class="exp-early-role"><strong>Inventory Coordinator</strong> · GoodFood Market</span>
+                  <span class="exp-prior-period">2020 – 2021</span>
+                </div>
+                <div class="exp-early-row">
+                  <span class="exp-early-role"><strong>Quality Assurance Intern</strong> · DENSO International</span>
+                  <span class="exp-prior-period">2016</span>
+                </div>
+              </div>
             </div>
 
           </div>
@@ -190,16 +257,48 @@
               <div class="skill-bar"><div class="skill-fill" style="--w:92%"></div></div>
             </div>
             <div class="skill-row">
-              <span class="skill-name">Azure</span>
+              <span class="skill-name">T-SQL &amp; Dimensional Modelling</span>
+              <div class="skill-bar"><div class="skill-fill" style="--w:87%"></div></div>
+            </div>
+            <div class="skill-row">
+              <span class="skill-name">Power Platform &amp; Copilot Studio</span>
               <div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div>
             </div>
             <div class="skill-row">
-              <span class="skill-name">Python</span>
+              <span class="skill-name">Python &amp; PySpark</span>
               <div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div>
             </div>
-            <div class="skill-row">
-              <span class="skill-name">Relational Database Management</span>
-              <div class="skill-bar"><div class="skill-fill" style="--w:78%"></div></div>
+          </div>
+
+          <div class="skills-title">Core Competencies</div>
+          <div class="competency-chips">
+            <span class="comp-chip">Retail Strategy</span>
+            <span class="comp-chip">Forecasting</span>
+            <span class="comp-chip">P&amp;L Management</span>
+            <span class="comp-chip">Change Management</span>
+            <span class="comp-chip">Data Governance</span>
+            <span class="comp-chip">Ingestion</span>
+            <span class="comp-chip">Orchestration</span>
+            <span class="comp-chip">Quality Assurance</span>
+            <span class="comp-chip">Dimensional Modelling</span>
+            <span class="comp-chip">Visualization</span>
+          </div>
+
+          <div class="skills-title">Education</div>
+          <div class="edu-list">
+            <div class="edu-item">
+              <span class="edu-icon">🎓</span>
+              <div>
+                <div class="edu-degree">M.Eng, Industrial Engineering</div>
+                <div class="edu-school">Concordia University · Montreal, Canada</div>
+              </div>
+            </div>
+            <div class="edu-item">
+              <span class="edu-icon">🎓</span>
+              <div>
+                <div class="edu-degree">B.Eng, Mechanical Engineering</div>
+                <div class="edu-school">Vellore Institute of Technology · India</div>
+              </div>
             </div>
           </div>
         </div>
@@ -217,23 +316,42 @@
       <div class="filter-bar">
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="powerbi">Power BI</button>
+        <button class="filter-btn" data-filter="apps">Apps &amp; Agents</button>
         <button class="filter-btn" data-filter="python">Python</button>
         <button class="filter-btn" data-filter="automation">Automation</button>
       </div>
 
       <div class="projects-grid">
 
+        <div class="project-card featured" data-tags="apps automation">
+          <div class="project-top">
+            <div class="project-icon" style="--c:#7c5cfc">📦</div>
+            <div class="project-tags">
+              <span class="tag">React</span>
+              <span class="tag">Inventory</span>
+              <span class="tag">Agentic</span>
+            </div>
+          </div>
+          <h3 class="project-title">Retail Inventory Management App</h3>
+          <p class="project-desc">On/off-shelf inventory capacity splits, location capacity heatmaps, re-order triggers, and journal-entry overviews — with purchase-order tracking and agentic order-flow evaluation.</p>
+          <div class="project-date">June 2026</div>
+          <div class="project-footer">
+            <a class="project-link" href="https://github.com/avixd/retail-inventory-app" target="_blank" rel="noopener">View project →</a>
+          </div>
+        </div>
+
         <div class="project-card" data-tags="powerbi">
           <div class="project-top">
             <div class="project-icon" style="--c:#F2C94C">📊</div>
             <div class="project-tags">
               <span class="tag">Power BI</span>
-              <span class="tag">DAX</span>
-              <span class="tag">Sales</span>
+              <span class="tag">Forecasting</span>
+              <span class="tag">Segmentation</span>
             </div>
           </div>
-          <h3 class="project-title">Adventure Works Sales Analysis</h3>
-          <p class="project-desc">End-to-end Power BI dashboard analysing Adventure Works sales data. Features dynamic YTD/fiscal metrics, Calculation Groups, Field Parameters, and drill-through pages to surface performance insights at product and territory level.</p>
+          <h3 class="project-title">Order &amp; Customer Analysis</h3>
+          <p class="project-desc">Forecasting, trend analysis, and customer-segmentation dashboards built in Power BI on the Adventure Works dataset — with YTD vs prior-year KPI comparisons, drill-down time series, and Pareto analysis to identify best sellers.</p>
+          <div class="project-date">Feb 2022</div>
           <div class="project-footer">
             <a class="project-link" href="https://github.com/avixd/avixd/blob/master/Sales-Analysis-Project.md" target="_blank" rel="noopener">View project →</a>
           </div>
@@ -248,8 +366,9 @@
               <span class="tag">Power BI</span>
             </div>
           </div>
-          <h3 class="project-title">Dynamic Fiscal & YTD Metrics</h3>
+          <h3 class="project-title">Dynamic Fiscal &amp; YTD Metrics</h3>
           <p class="project-desc">A deep-dive on building flexible time-intelligence using Calculation Groups and Field Parameters — enabling users to switch between fiscal calendar, YTD, rolling 12-month, and prior-year comparisons from a single slicer.</p>
+          <div class="project-date">Technique write-up</div>
           <div class="project-footer">
             <a class="project-link" href="https://github.com/avixd/avixd/blob/master/Dynamic-(F)YTD-measures-with-Calculation-Groups-and-Field-Parameters.md" target="_blank" rel="noopener">View project →</a>
           </div>
@@ -264,8 +383,9 @@
               <span class="tag">Statistics</span>
             </div>
           </div>
-          <h3 class="project-title">Multiple Linear Regression</h3>
-          <p class="project-desc">Implemented a multiple linear regression model from scratch using Python and scikit-learn to predict outcomes from multi-variable datasets. Covers feature engineering, assumption testing (VIF, residuals), and model evaluation metrics.</p>
+          <h3 class="project-title">Multiple Linear Regression in Python</h3>
+          <p class="project-desc">Supervised regression model built with pandas, scikit-learn, matplotlib and seaborn to predict profit from multiple features — covering exploratory analysis, model fitting, and evaluation.</p>
+          <div class="project-date">Mar 2022</div>
           <div class="project-footer">
             <a class="project-link" href="https://github.com/avixd/avixd/blob/master/Multiple-Linear-Regression.md" target="_blank" rel="noopener">View project →</a>
           </div>
@@ -276,12 +396,13 @@
             <div class="project-icon" style="--c:#27AE60">⚡</div>
             <div class="project-tags">
               <span class="tag">Power Automate</span>
+              <span class="tag">SQL Server</span>
               <span class="tag">Excel</span>
-              <span class="tag">RPA</span>
             </div>
           </div>
-          <h3 class="project-title">Excel Automation with PAD</h3>
-          <p class="project-desc">Built a desktop automation flow with Power Automate Desktop to eliminate repetitive Excel data-entry tasks. Reduced manual processing time significantly by leveraging UI flows, loops, and conditional logic — no code required.</p>
+          <h3 class="project-title">Excel Automation with SQL Server &amp; PAD</h3>
+          <p class="project-desc">Streamlined Excel reporting with Power Automate Desktop and SQL Server, applying defined business logic to query and write data — removing repetitive manual handling from the reporting cycle.</p>
+          <div class="project-date">Jan 2022</div>
           <div class="project-footer">
             <a class="project-link" href="https://github.com/avixd/avixd/blob/master/PAD-Excel-Automation.md" target="_blank" rel="noopener">View project →</a>
           </div>
@@ -296,43 +417,114 @@
     <div class="section-inner">
       <div class="section-label">Credentials</div>
       <h2 class="section-title">Professional <span class="gradient-text">development</span></h2>
-      <p class="section-sub">Click any credential to verify it on the issuing platform.</p>
+      <p class="section-sub">5× Microsoft Certified and a 2× Fabric Community Super User. Click any badge to verify it on the issuing platform.</p>
       <div class="certs-grid">
+
         <a class="cert-card" href="https://www.credly.com/badges/4d91981f-e8e8-49c7-b147-9062e117f32d/linked_in_profile" target="_blank" rel="noopener">
-          <span class="cert-card-star">✦</span>
-          <span>Fabric Community Super User FY24/25</span>
-          <span class="cert-card-year">2024</span>
+          <span class="cert-badge">
+            <img src="assets/badges/fabric-super-user.png" alt="Fabric Community Super User FY24/25 badge" loading="lazy" width="92" height="92" />
+          </span>
+          <span>
+            <span class="cert-name">Fabric Community Super User</span>
+            <span class="cert-issuer">Microsoft Fabric Community</span>
+          </span>
+          <span class="cert-meta">
+            <span class="cert-code">FY24/25</span>
+            <span class="cert-card-year">2024</span>
+          </span>
+          <span class="cert-verify">Verify →</span>
         </a>
-        <a class="cert-card" href="https://learn.microsoft.com/en-us/users/avinashdudani-9165/credentials/21033c34b5fbf6eb?ref=https%3A%2F%2Fwww.linkedin.com%2F" target="_blank" rel="noopener">
-          <span class="cert-card-star">✦</span>
-          <span>Microsoft Certified: Fabric Analytics Engineer Associate</span>
-          <span class="cert-card-year">2024</span>
+
+        <a class="cert-card" href="https://learn.microsoft.com/en-us/users/avinashdudani-9165/credentials/21033c34b5fbf6eb" target="_blank" rel="noopener">
+          <span class="cert-badge">
+            <img src="assets/badges/ms-associate.svg" alt="Microsoft Certified Associate badge" loading="lazy" width="92" height="92" />
+          </span>
+          <span>
+            <span class="cert-name">Fabric Analytics Engineer Associate</span>
+            <span class="cert-issuer">Microsoft</span>
+          </span>
+          <span class="cert-meta">
+            <span class="cert-code">DP-600</span>
+            <span class="cert-card-year">2024</span>
+          </span>
+          <span class="cert-verify">Verify →</span>
         </a>
-        <a class="cert-card" href="https://learn.microsoft.com/en-us/users/avinashdudani-1643/credentials/9c08355751359ca8?ref=https%3A%2F%2Fwww.linkedin.com%2F" target="_blank" rel="noopener">
-          <span class="cert-card-star">✦</span>
-          <span>Microsoft Certified: Azure Administrator Associate</span>
-          <span class="cert-card-year">2023</span>
+
+        <a class="cert-card" href="https://learn.microsoft.com/en-us/users/avinashdudani-1643/credentials/5770642f4e1d9b76" target="_blank" rel="noopener">
+          <span class="cert-badge">
+            <img src="assets/badges/ms-associate.svg" alt="Microsoft Certified Associate badge" loading="lazy" width="92" height="92" />
+          </span>
+          <span>
+            <span class="cert-name">Power BI Data Analyst Associate</span>
+            <span class="cert-issuer">Microsoft</span>
+          </span>
+          <span class="cert-meta">
+            <span class="cert-code">PL-300</span>
+            <span class="cert-card-year">2023</span>
+          </span>
+          <span class="cert-verify">Verify →</span>
         </a>
-        <a class="cert-card" href="https://learn.microsoft.com/en-us/users/avinashdudani-1643/credentials/5770642f4e1d9b76?ref=https%3A%2F%2Fwww.linkedin.com%2F" target="_blank" rel="noopener">
-          <span class="cert-card-star">✦</span>
-          <span>Microsoft Certified: Power BI Data Analyst Associate</span>
-          <span class="cert-card-year">2023</span>
+
+        <a class="cert-card" href="https://learn.microsoft.com/en-us/users/avinashdudani-1643/credentials/9c08355751359ca8" target="_blank" rel="noopener">
+          <span class="cert-badge">
+            <img src="assets/badges/ms-associate.svg" alt="Microsoft Certified Associate badge" loading="lazy" width="92" height="92" />
+          </span>
+          <span>
+            <span class="cert-name">Azure Administrator Associate</span>
+            <span class="cert-issuer">Microsoft</span>
+          </span>
+          <span class="cert-meta">
+            <span class="cert-code">AZ-104</span>
+            <span class="cert-card-year">2023</span>
+          </span>
+          <span class="cert-verify">Verify →</span>
         </a>
-        <a class="cert-card" href="https://learn.microsoft.com/en-us/users/avinashdudani-1643/credentials/a2ebf838334a3ee4?ref=https%3A%2F%2Fwww.linkedin.com%2F" target="_blank" rel="noopener">
-          <span class="cert-card-star">✦</span>
-          <span>Microsoft Certified: Azure Data Fundamentals</span>
-          <span class="cert-card-year">2023</span>
+
+        <a class="cert-card" href="https://learn.microsoft.com/en-us/users/avinashdudani-1643/credentials/a2ebf838334a3ee4" target="_blank" rel="noopener">
+          <span class="cert-badge">
+            <img src="assets/badges/ms-fundamentals.svg" alt="Microsoft Certified Fundamentals badge" loading="lazy" width="92" height="92" />
+          </span>
+          <span>
+            <span class="cert-name">Azure Data Fundamentals</span>
+            <span class="cert-issuer">Microsoft</span>
+          </span>
+          <span class="cert-meta">
+            <span class="cert-code">DP-900</span>
+            <span class="cert-card-year">2023</span>
+          </span>
+          <span class="cert-verify">Verify →</span>
         </a>
-        <a class="cert-card" href="https://learn.microsoft.com/en-us/users/avinashdudani-1643/credentials/c7f397b69259d36d?ref=https%3A%2F%2Fwww.linkedin.com%2F" target="_blank" rel="noopener">
-          <span class="cert-card-star">✦</span>
-          <span>Microsoft Certified: Azure Fundamentals</span>
-          <span class="cert-card-year">2023</span>
+
+        <a class="cert-card" href="https://learn.microsoft.com/en-us/users/avinashdudani-1643/credentials/c7f397b69259d36d" target="_blank" rel="noopener">
+          <span class="cert-badge">
+            <img src="assets/badges/ms-fundamentals.svg" alt="Microsoft Certified Fundamentals badge" loading="lazy" width="92" height="92" />
+          </span>
+          <span>
+            <span class="cert-name">Azure Fundamentals</span>
+            <span class="cert-issuer">Microsoft</span>
+          </span>
+          <span class="cert-meta">
+            <span class="cert-code">AZ-900</span>
+            <span class="cert-card-year">2023</span>
+          </span>
+          <span class="cert-verify">Verify →</span>
         </a>
+
         <a class="cert-card" href="https://www.credly.com/badges/6a7b9d75-c6db-43db-8ffc-b9340b95d232/public_url" target="_blank" rel="noopener">
-          <span class="cert-card-star">✦</span>
-          <span>Certified Associate in Project Management (CAPM)®</span>
-          <span class="cert-card-year">2020</span>
+          <span class="cert-badge">
+            <img src="assets/badges/capm.png" alt="Certified Associate in Project Management (CAPM) badge" loading="lazy" width="92" height="92" />
+          </span>
+          <span>
+            <span class="cert-name">Certified Associate in Project Management</span>
+            <span class="cert-issuer">Project Management Institute</span>
+          </span>
+          <span class="cert-meta">
+            <span class="cert-code">CAPM®</span>
+            <span class="cert-card-year">2020</span>
+          </span>
+          <span class="cert-verify">Verify →</span>
         </a>
+
       </div>
     </div>
   </section>
@@ -350,8 +542,8 @@
         </div>
         <div class="service-card">
           <div class="service-icon">☁️</div>
-          <h3>Azure Data Solutions</h3>
-          <p>Cloud data pipelines with Azure Data Factory, Synapse Analytics, and Microsoft Fabric lakehouses.</p>
+          <h3>Microsoft Fabric &amp; Azure</h3>
+          <p>End-to-end Fabric solutions — ingestion, orchestration and dimensional modelling with Data Factory, lakehouses and PySpark.</p>
         </div>
         <div class="service-card">
           <div class="service-icon">🐍</div>
@@ -360,8 +552,8 @@
         </div>
         <div class="service-card">
           <div class="service-icon">⚙️</div>
-          <h3>Workflow Automation</h3>
-          <p>Automate repetitive tasks with Power Automate Desktop and cloud flows, saving hours every week.</p>
+          <h3>Agentic Automation</h3>
+          <p>Decision-support apps and agentic workflows with Copilot Studio, Power Automate and SharePoint — turning insight into action.</p>
         </div>
       </div>
     </div>
@@ -438,7 +630,7 @@
   <footer>
     <div class="footer-inner">
       <span class="footer-logo">AD</span>
-      <span class="footer-copy">© 2025 Avinash Dudani · Built with passion for data</span>
+      <span class="footer-copy">© <span id="footerYear">2026</span> Avinash Dudani · Built with passion for data</span>
       <div class="footer-links">
         <a href="https://github.com/avixd" target="_blank" rel="noopener">GitHub</a>
         <a href="https://youtube.com/@Empower_Data" target="_blank" rel="noopener">YouTube</a>
