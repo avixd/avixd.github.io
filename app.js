@@ -109,6 +109,24 @@ document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 const filterBtns = document.querySelectorAll('.filter-btn');
 const projectCards = document.querySelectorAll('.project-card');
 
+/* ── Mark the two most recent projects as "Latest" ──
+   Derived from each card's .project-date so new projects pick this up on their
+   own — no need to hand-edit classes when a project is added. Cards whose date
+   isn't parseable (e.g. "Technique write-up") are treated as undated and never
+   marked. */
+const LATEST_COUNT = 2;
+projectCards.forEach(card => card.classList.remove('featured'));
+[...projectCards]
+  .map(card => {
+    const label = card.querySelector('.project-date')?.textContent.trim() ?? '';
+    const time = Date.parse(label);
+    return { card, time: Number.isNaN(time) ? -Infinity : time };
+  })
+  .filter(entry => entry.time !== -Infinity)
+  .sort((a, b) => b.time - a.time)
+  .slice(0, LATEST_COUNT)
+  .forEach(entry => entry.card.classList.add('featured'));
+
 filterBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     filterBtns.forEach(b => b.classList.remove('active'));
