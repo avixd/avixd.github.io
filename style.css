@@ -652,6 +652,7 @@ section:nth-child(even) { background: var(--bg2); }
   gap: 20px;
 }
 .service-card {
+  display: block; /* cards are anchors; keep the block layout they had as divs */
   background: var(--bg3); border: 1px solid var(--border);
   border-radius: var(--radius); padding: 28px 24px;
   transition: border-color .2s, transform .2s;
