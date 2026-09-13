@@ -86,13 +86,14 @@ const skillIO = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.3 });
 
-const skillsPanel = document.querySelector('.skills-panel');
-if (skillsPanel) skillIO.observe(skillsPanel);
+/* Skill bars live in the .about-extras band, not .skills-panel. */
+const skillsHost = document.querySelector('.about-extras');
+if (skillsHost) skillIO.observe(skillsHost);
 
 /* ── Add fade-up to sections ── */
 const animTargets = [
-  '.hero-badge', '.hero-title', '.hero-sub', '.hero-actions', '.hero-stats',
-  '.chart-card', '.about-text', '.skills-panel',
+  '.hero-badge', '.hero-title', '.hero-sub', '.hero-actions',
+  '.about-text', '.skills-panel', '.extra-card',
   '.project-card', '.cert-card', '.service-card', '.channel-card', '.contact-form',
 ];
 animTargets.forEach(sel => {
