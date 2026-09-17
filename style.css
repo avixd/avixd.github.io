@@ -613,27 +613,44 @@ section:nth-child(even) { background: var(--bg2); }
 /* ── Services ── */
 #services { background: var(--bg2); }
 
-.services-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 20px;
+/* Package ladder — fixed-scope engagements, quoted per project (no published prices) */
+.package-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px; align-items: stretch;
 }
-.service-card {
-  display: block; /* cards are anchors; keep the block layout they had as divs */
+.package-card {
   background: var(--bg3); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 28px 24px;
-  transition: border-color .2s, transform .2s;
+  border-radius: var(--radius); padding: 26px 24px;
+  display: flex; flex-direction: column; gap: 14px;
   box-shadow: var(--card-shadow);
+  transition: border-color .2s, transform .2s;
 }
-.service-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-.service-icon { font-size: 2rem; margin-bottom: 14px; }
-.service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-.service-card p { font-size: .875rem; color: var(--muted); line-height: 1.65; }
-.service-action {
-  display: inline-block; margin-top: 14px;
+.package-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.package-card.is-featured { border-color: rgba(124,92,252,0.45); }
+.package-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.package-duration {
+  font-size: .68rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--accent-label); border: 1px solid var(--border);
+  border-radius: 999px; padding: 4px 10px; white-space: nowrap;
+}
+.package-name { font-size: 1.02rem; font-weight: 700; }
+.package-scope { list-style: none; display: flex; flex-direction: column; gap: 9px; margin: 0; padding: 0; }
+.package-scope li {
+  position: relative; padding-left: 20px;
+  font-size: .85rem; color: var(--muted); line-height: 1.55;
+}
+.package-scope li::before {
+  content: '¹3'; position: absolute; left: 0; top: 0;
+  color: var(--accent2); font-weight: 700;
+}
+.package-cta {
+  margin-top: auto; padding-top: 4px;
   font-size: .85rem; font-weight: 600; color: var(--accent2);
-  transition: gap .2s, opacity .2s;
+  transition: opacity .2s;
 }
-.service-card:hover .service-action { opacity: .8; }
+.package-card:hover .package-cta { opacity: .8; }
+.service-icon { font-size: 1.7rem; line-height: 1; }
+
 
 /* Supporting detail band beneath the About/Experience columns */
 .about-extras {
