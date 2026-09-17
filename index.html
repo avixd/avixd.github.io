@@ -122,12 +122,50 @@
       <div class="filter-bar">
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="apps">Apps &amp; Agents</button>
+        <button class="filter-btn" data-filter="engineering">Data Engineering</button>
         <button class="filter-btn" data-filter="powerbi">Power BI</button>
+        <button class="filter-btn" data-filter="leadership">Leadership</button>
         <button class="filter-btn" data-filter="python">Python</button>
         <button class="filter-btn" data-filter="automation">Automation</button>
       </div>
 
       <div class="projects-grid">
+
+        <div class="project-card" data-tags="engineering python">
+          <div class="project-top">
+            <div class="project-icon" style="--c:#F2994A">⛓️</div>
+            <div class="project-tags">
+              <span class="tag">dbt</span>
+              <span class="tag">DuckDB</span>
+              <span class="tag">Star Schema</span>
+            </div>
+          </div>
+          <h3 class="project-title">Retail Analytics Platform</h3>
+          <p class="project-desc">A medallion pipeline over 1.07M retail transactions — bronze, silver and gold layers in dbt, a five-table star schema, and 50 data tests in CI. Every cleaning decision is quarantined and auditable rather than silently applied.</p>
+          <div class="project-date">Sep 2026</div>
+          <div class="project-footer">
+            <a class="project-link" href="https://github.com/avixd/retail-analytics-platform" target="_blank" rel="noopener">View the case study →</a>
+            <a class="project-link secondary" href="https://github.com/avixd/retail-analytics-platform/actions/workflows/dbt.yml" target="_blank" rel="noopener">See the build pipeline →</a>
+          </div>
+        </div>
+
+        <div class="project-card" data-tags="leadership">
+          <div class="project-top">
+            <div class="project-icon" style="--c:#EB5757">🧭</div>
+            <div class="project-tags">
+              <span class="tag">Governance</span>
+              <span class="tag">Operating Model</span>
+              <span class="tag">SLA</span>
+            </div>
+          </div>
+          <h3 class="project-title">The BI Operating Model</h3>
+          <p class="project-desc">How to run an internal BI function — single-door intake, a weighted prioritisation scorecard that publishes what falls below the line, five delivery stages with exit criteria, tiered SLAs, revocable certification and adoption metrics that treat retirement as a feature.</p>
+          <div class="project-date">Sep 2026</div>
+          <div class="project-footer">
+            <a class="project-link" href="https://github.com/avixd/bi-operating-model" target="_blank" rel="noopener">Read the playbook →</a>
+            <a class="project-link secondary" href="https://avixd.github.io/bi-service-demo/" target="_blank" rel="noopener">See it as an app →</a>
+          </div>
+        </div>
 
         <div class="project-card" data-tags="apps">
           <div class="project-top">
