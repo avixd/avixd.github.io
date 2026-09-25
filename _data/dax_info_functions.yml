@@ -1,0 +1,19 @@
+# One entry per function section on /dax-info-functions/.
+# To add a function: drop its video in assets/videos/, write its notes in
+# _includes/dax-info-functions/<id>.md, then add an entry below.
+- id: info-view-measures
+  name: INFO.VIEW.MEASURES()
+  label: Measures
+  summary: Every measure in the model — name, formula, format and description — in one table. The fastest way to audit and document a semantic model.
+  video: /assets/videos/info-view-measures.mp4
+  poster: /assets/videos/info-view-measures-poster.jpg
+  video_title: Audit your measures in seconds with INFO.VIEW.MEASURES
+  transcript: >-
+    New to Power BI? Here's a superpower you'll love. Instead of clicking
+    through every single calculation, you can see all your measures in one
+    simple table. Just open your model view, and you'll see each measure's
+    name, what it calculates, and how it's formatted — all
+    in one place. No more guessing. No more hunting. It's the fastest way to
+    clean up your report and feel confident about your numbers. Try it on
+    your next report!
+  notes: dax-info-functions/info-view-measures.md

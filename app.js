@@ -1,4 +1,5 @@
-window.scrollTo(0, 0);
+// Start at the top unless a deep link asks for a section (the home page strips its hash first)
+if (!location.hash) window.scrollTo(0, 0);
 
 /* ── Theme toggle (light / dark) ── */
 const root = document.documentElement;
@@ -44,14 +45,14 @@ if (footerYear) footerYear.textContent = String(new Date().getFullYear());
 /* ── Nav scroll effect ── */
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
+  nav?.classList.toggle('scrolled', window.scrollY > 40);
 }, { passive: true });
 
 /* ── Mobile hamburger ── */
 const hamburger = document.getElementById('hamburger');
 const mobileMenu = document.getElementById('mobileMenu');
 
-hamburger.addEventListener('click', () => {
+hamburger?.addEventListener('click', () => {
   const open = hamburger.classList.toggle('open');
   mobileMenu.classList.toggle('open', open);
   hamburger.setAttribute('aria-expanded', String(open));
@@ -59,9 +60,9 @@ hamburger.addEventListener('click', () => {
 
 document.querySelectorAll('.mobile-link').forEach(link => {
   link.addEventListener('click', () => {
-    hamburger.classList.remove('open');
-    mobileMenu.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
+    hamburger?.classList.remove('open');
+    mobileMenu?.classList.remove('open');
+    hamburger?.setAttribute('aria-expanded', 'false');
   });
 });
 
@@ -144,7 +145,7 @@ filterBtns.forEach(btn => {
 const form = document.getElementById('contactForm');
 const formNote = document.getElementById('formNote');
 
-form.addEventListener('submit', async (e) => {
+form?.addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = form.querySelector('button[type="submit"]');
   btn.textContent = 'Sending…';
