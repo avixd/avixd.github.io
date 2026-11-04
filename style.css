@@ -290,16 +290,8 @@ section:nth-child(even) { background: var(--bg2); }
 
 .hero-sub {
   color: var(--muted); font-size: 1.1rem;
-  line-height: 1.7; margin-bottom: 18px;
+  line-height: 1.7; margin-bottom: 36px;
 }
-
-/* Work-mode and relocation signal — the first thing an overseas recruiter looks for. */
-.hero-availability {
-  color: var(--muted); font-size: .92rem; line-height: 1.6;
-  margin-bottom: 36px; padding-left: 14px;
-  border-left: 2px solid var(--accent);
-}
-.hero-availability strong { color: var(--text); font-weight: 600; }
 
 /* Credentials banner — one compiled strip of every badge, links to the full section */
 .hero-credentials { display: block; margin-top: 34px; max-width: 760px; }
