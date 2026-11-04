@@ -146,6 +146,7 @@
           <div class="project-footer">
             <a class="project-link" href="https://avixd.github.io/retail-inventory-app/" target="_blank" rel="noopener">Launch live app →</a>
             <a class="project-link secondary" href="https://github.com/avixd/retail-inventory-app/blob/master/docs/README.md" target="_blank" rel="noopener">Read the documentation →</a>
+            <button type="button" class="project-link secondary video-link" data-video="assets/video/retail-inventory-demo.mp4" data-poster="assets/video/retail-inventory-demo-poster.jpg" data-title="Retail Inventory Control Tower: demo (1:24)">▶ Watch the demo (1:24)</button>
           </div>
         </div>
 
@@ -697,6 +698,16 @@
       </div>
     </div>
   </footer>
+
+  <!-- Demo video player: one shared dialog, opened by any .video-link button.
+       The file only loads when a visitor presses play. -->
+  <dialog id="video-dialog" class="video-dialog" aria-labelledby="video-dialog-title">
+    <div class="video-dialog__head">
+      <h3 id="video-dialog-title" class="video-dialog__title"></h3>
+      <button type="button" class="video-dialog__close" aria-label="Close video">✕</button>
+    </div>
+    <video class="video-dialog__player" controls playsinline preload="none"></video>
+  </dialog>
 
   <script src="app.js"></script>
 </body>

@@ -195,3 +195,30 @@ const navIO = new IntersectionObserver((entries) => {
 }, { rootMargin: '-40% 0px -55% 0px' });
 
 sections.forEach(s => navIO.observe(s));
+
+/* ── Demo video dialog ──
+   Buttons with data-video open one shared <dialog>. The source is attached on
+   open and removed on close, so nothing downloads until a visitor asks for it
+   and the video stops when the dialog closes (Esc, ✕, or a click outside). */
+const videoDialog = document.getElementById('video-dialog');
+if (videoDialog && typeof videoDialog.showModal === 'function') {
+  const player = videoDialog.querySelector('video');
+  const title = videoDialog.querySelector('.video-dialog__title');
+  document.querySelectorAll('.video-link[data-video]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      title.textContent = btn.dataset.title || 'Demo';
+      player.poster = btn.dataset.poster || '';
+      player.src = btn.dataset.video;
+      videoDialog.showModal();
+      player.play().catch(() => {}); // autoplay may be blocked; controls remain
+    });
+  });
+  videoDialog.querySelector('.video-dialog__close').addEventListener('click', () => videoDialog.close());
+  videoDialog.addEventListener('click', e => { if (e.target === videoDialog) videoDialog.close(); });
+  videoDialog.addEventListener('close', () => { player.pause(); player.removeAttribute('src'); player.load(); });
+} else {
+  // Very old browsers without <dialog>: open the file directly instead.
+  document.querySelectorAll('.video-link[data-video]').forEach(btn => {
+    btn.addEventListener('click', () => { window.location.href = btn.dataset.video; });
+  });
+}
